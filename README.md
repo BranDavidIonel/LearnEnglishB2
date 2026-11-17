@@ -1,103 +1,103 @@
 # English Levels · A1 → B2
 
-Aplicație locală pentru învățat engleza de la **A1 la B2**, făcută pentru un vorbitor de română care lucrează în programare (clienți, CRM, ERP), dar și pentru călătorii și viața de zi cu zi.
+A local app for learning English from **A1 to B2**, built for a Romanian speaker who works in software (clients, CRM, ERP) and also needs English for travel and everyday life.
 
-Merge pe nivele: fiecare unitate se termină cu un test, fiecare nivel cu un examen, iar dacă nu treci te trimite înapoi exact la unitățile pe care trebuie să le repeți. Pe lângă curs are exerciții de vorbit cu microfonul, cartonașe cu repetare la intervale și simulări de examene Cambridge (PET și FCE).
+It is organised in levels: each unit ends with a test and each level with an exam. If you fail, it sends you back to exactly the units you need to review. Besides the course, it has speaking practice with the microphone, spaced-repetition flashcards and Cambridge mock exams (PET and FCE).
 
 | | |
 |---|---|
-| ![Pagina principală](docs/screenshots/home.png) | ![Lecții pe nivele](docs/screenshots/learn.png) |
-| **Acasă** — ce urmează, zile la rând, drumul spre B2 | **Învață** — unitățile pe nivele și examenele |
-| ![Cuvinte noi cu poză](docs/screenshots/lesson-words.png) | ![Conversație cu vocea](docs/screenshots/conversation.png) |
-| **Cuvinte noi** — poză, pronunție, exemplu | **Vorbire** — conversații în care răspunzi cu voce tare |
-| ![Grafic de progres](docs/screenshots/progress.png) | ![Cuvintele mele](docs/screenshots/words.png) |
-| **Progres** — grafic pe zile, ca la cripto | **Cuvinte** — învățate / în curs / de învățat |
-| ![Simulări Cambridge](docs/screenshots/cambridge.png) | ![Gramatică în tema luminoasă](docs/screenshots/grammar-light.png) |
-| **Cambridge** — „sunt pregătit pentru examen?” | **Gramatică** explicată în română (tema luminoasă) |
+| ![Home page](docs/screenshots/home.png) | ![Lessons by level](docs/screenshots/learn.png) |
+| **Home** — what's next, day streak, your road to B2 | **Learn** — units by level and the level exams |
+| ![New words with a picture](docs/screenshots/lesson-words.png) | ![Voice conversation](docs/screenshots/conversation.png) |
+| **New words** — picture, pronunciation, example | **Speaking** — conversations where you answer aloud |
+| ![Progress chart](docs/screenshots/progress.png) | ![My words](docs/screenshots/words.png) |
+| **Progress** — daily chart, crypto-style | **Words** — learned / learning / to learn |
+| ![Cambridge mock exams](docs/screenshots/cambridge.png) | ![Grammar in the light theme](docs/screenshots/grammar-light.png) |
+| **Cambridge** — "am I ready for the exam?" | **Grammar** explained in Romanian (light theme) |
 
-<sub>Capturile sunt făcute cu date demo.</sub>
+<sub>The screenshots were taken with demo data.</sub>
 
-## Ce conține
+## What's inside
 
-- **Curs A1 → B2:** 40 de unități, câte 10 pe nivel. Fiecare are cuvinte noi, gramatică explicată în română, un dialog, exerciții, un text de citit și un test final.
-- **Conținut:** aproximativ 614 cuvinte, 960 de exerciții de 6 tipuri (variante, completare, ordonarea cuvintelor, traducere, dictare, perechi) și 37 de videouri recomandate.
-- **Test de nivel** la început, ca să sari peste ce știi deja.
-- **Vorbire:**
-  - 32 de conversații (client, interviu, negociere, hotel, aeroport);
-  - 240 de fraze de repetat;
-  - întrebări ca la interviu;
-  - perechi de cuvinte care sună la fel (*ship / sheep*);
-  - un sprint vocal;
-  - joc de rol din dialogurile lecțiilor.
-- **Cartonașe** cu repetare la intervale și o listă cu toate cuvintele, unde poți marca ce știi deja.
-- **Jocuri** cu cuvinte, pagina „Greșelile mele”, realizări și obiectiv zilnic.
-- **Cambridge:** câte 2 simulări complete pentru B1 Preliminary (PET) și B2 First (FCE), cu indicator „sunt pregătit?”.
-- **Setări:** limba interfeței (EN / RO, engleza implicit), 4 teme de culori, vocea și testul de microfon.
+- **A1 → B2 course:** 40 units, 10 per level. Each has new words, grammar explained in Romanian, a dialogue, exercises, a reading text and a final test.
+- **Content:** about 614 words, 960 exercises of 6 types (multiple choice, fill the gap, word order, translation, dictation, matching pairs) and 37 recommended videos.
+- **Placement test** at the start, so you can skip what you already know.
+- **Speaking:**
+  - 32 conversations (client, interview, negotiation, hotel, airport);
+  - 240 phrases to repeat;
+  - interview-style questions;
+  - sound-alike word pairs (*ship / sheep*);
+  - a voice sprint;
+  - role-play from the lesson dialogues.
+- **Flashcards** with spaced repetition and a list of every word, where you can mark what you already know.
+- **Word games**, a "My mistakes" page, achievements and a daily goal.
+- **Cambridge:** 2 full mock exams each for B1 Preliminary (PET) and B2 First (FCE), with an "am I ready?" indicator.
+- **Settings:** interface language (EN / RO, English by default), 4 colour themes, voice and a microphone test.
 
-## Cum pornești
+## Getting started
 
-Ai nevoie de [Node.js](https://nodejs.org) 18.11 sau mai nou. Pentru exercițiile de vorbit folosește Chrome sau Edge.
+You need [Node.js](https://nodejs.org) 18.11 or newer. For the speaking exercises use Chrome or Edge.
 
-- **Windows:** dublu-click pe `Start.bat`. Se deschide singur la `http://localhost:4747`.
-- **Din terminal:**
+- **Windows:** double-click `Start.bat`. It opens `http://localhost:4747` by itself.
+- **From a terminal:**
 
   ```bash
   npm start
   ```
 
-Fereastra neagră trebuie să rămână deschisă cât înveți. Serverul se repornește singur când se schimbă `server.js`, deci după o actualizare e suficient să reîncarci pagina.
+Keep the black window open while you study. The server restarts itself when `server.js` changes, so after an update you only need to reload the page.
 
-Pentru alt port: `node server.js --port=4848`.
+To use another port: `node server.js --port=4848`.
 
-## Cu ce e făcut
+## Built with
 
-| Parte | Tehnologie |
+| Part | Technology |
 |---|---|
-| Server | Node.js, fără nicio dependență (doar `http` și `fs`) — `server.js` |
-| Interfață | HTML, CSS și JavaScript simplu (ES modules), fără framework și fără build |
-| Vocea care citește | Web Speech API — `speechSynthesis` (vocile din Windows / browser) |
-| Recunoașterea vorbirii | Web Speech API — `SpeechRecognition` din Chrome / Edge; dacă serviciul online nu merge, folosește recunoașterea locală, pe calculator |
-| Înregistrare | `MediaRecorder` (te înregistrezi și te asculți) |
-| Poze pentru cuvinte | API-ul Wikipedia (`page/summary`) |
-| Videouri | YouTube încorporat (`youtube-nocookie.com`) |
-| Grafic de progres | SVG desenat de mână, fără bibliotecă |
-| Conținut | fișiere JSON în `data/`, verificate de scripturile din `tools/` |
-| Progres | `user/progress.json`, plus o copie în `localStorage` |
+| Server | Node.js with no dependencies (only `http` and `fs`) — `server.js` |
+| Interface | Plain HTML, CSS and JavaScript (ES modules), no framework and no build step |
+| Text-to-speech | Web Speech API — `speechSynthesis` (Windows / browser voices) |
+| Speech recognition | Web Speech API — `SpeechRecognition` in Chrome / Edge; if the online service is unavailable it falls back to on-device recognition |
+| Recording | `MediaRecorder` (record yourself and listen back) |
+| Word pictures | Wikipedia API (`page/summary`) |
+| Videos | Embedded YouTube (`youtube-nocookie.com`) |
+| Progress chart | Hand-drawn SVG, no chart library |
+| Content | JSON files in `data/`, checked by the scripts in `tools/` |
+| Progress | `user/progress.json`, plus a copy in `localStorage` |
 
-Totul e gratuit: fără conturi, fără chei de API, fără servicii plătite.
+Everything is free: no accounts, no API keys, no paid services.
 
-## Structura
+## Project structure
 
 ```
-server.js                 serverul (trimite conținutul, salvează progresul)
-Start.bat                 pornire pe Windows
-public/                   aplicația din browser
-  js/views/               paginile: lecții, vorbire, cuvinte, Cambridge, setări…
-  js/i18n.js              traducerile interfeței: L('română', 'English')
+server.js                 the server (sends the content, saves your progress)
+Start.bat                 one-click start on Windows
+public/                   the app that runs in the browser
+  js/views/               the pages: lessons, speaking, words, Cambridge, settings…
+  js/i18n.js              interface translations: L('română', 'English')
 data/
   a1/ a2/ b1/ b2/         unit01–10.json, placement.json, speaking.json
-  cambridge/pet|fce/      simulările de examen
-tools/                    formatul conținutului (SCHEMA*.md) și validatoarele
-user/progress.json        progresul tău
-docs/screenshots/         capturile din README
+  cambridge/pet|fce/      the mock exams
+tools/                    content format (SCHEMA*.md) and validators
+user/progress.json        your progress
+docs/screenshots/         the screenshots in this README
 ```
 
-## Progresul și git
+## Progress and git
 
-Progresul se salvează automat în `user/progress.json`, iar fișierul e păstrat intenționat în git (repo-ul e privat). Ca să ai o copie la zi pe GitHub, fă din când în când commit și push.
+Progress is saved automatically to `user/progress.json`, and the file is kept in git on purpose (the repository is private). To keep an up-to-date copy on GitHub, commit and push from time to time.
 
-Profilele de test (`node server.js --profile=test` → `user-test/`) sunt ignorate de git.
+Test profiles (`node server.js --profile=test` → `user-test/`) are ignored by git.
 
-## Conținut nou
+## Adding content
 
-Formatul e descris în `tools/SCHEMA.md` (lecții), `tools/SCHEMA-SPEAKING.md` (vorbire) și `tools/SCHEMA-CAMBRIDGE.md` (examene). După orice modificare în `data/`:
+The format is described in `tools/SCHEMA.md` (lessons), `tools/SCHEMA-SPEAKING.md` (speaking) and `tools/SCHEMA-CAMBRIDGE.md` (exams). After any change in `data/`, run:
 
 ```bash
 npm run validate
 ```
 
-## De știut
+## Good to know
 
-- Lecțiile, conversațiile și simulările au fost scrise cu ajutorul AI-ului (Claude) și **nu au fost verificate de un profesor**. Dacă găsești o greșeală, corecteaz-o în fișierul JSON și rulează validatorul.
-- Simulările Cambridge sunt originale, doar în **formatul** examenului real. Pentru o verificare finală folosește și testele-model oficiale de pe site-ul Cambridge.
-- Recunoașterea vocii verifică dacă te-a înțeles, nu îți notează accentul.
+- The lessons, conversations and mock exams were written with the help of AI (Claude) and **have not been checked by a teacher**. If you find a mistake, fix it in the JSON file and run the validator.
+- The Cambridge mock exams are original material that only follows the **format** of the real exams. For a final check, also use the official sample tests on the Cambridge website.
+- Speech recognition checks whether it understood you; it does not grade your accent.
