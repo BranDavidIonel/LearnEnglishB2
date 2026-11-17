@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "description": "Local app for learning English from A1 to B2 (for a Romanian speaker)",
+  "engines": {
+    "node": ">=18.11"
+  },
   "scripts": {
-    "start": "node server.js --open",
-    "validate": "node tools/validate.js"
+    "start": "node --watch server.js --open",
+    "validate": "node tools/validate.js && node tools/validate-speaking.js && node tools/validate-cambridge.js"
   }
 }

@@ -12,6 +12,12 @@
       "runtimeExecutable": "node",
       "runtimeArgs": ["server.js", "--port=4848", "--profile=test"],
       "port": 4848
+    },
+    {
+      "name": "english-levels-demo",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["server.js", "--port=4849", "--profile=demo"],
+      "port": 4849
     }
   ]
 }

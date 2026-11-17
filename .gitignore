@@ -1,0 +1,10 @@
+# Your progress (user/progress.json) IS kept in git on purpose.
+# Test / demo profiles of the server (node server.js --profile=name) are not.
+user-*/
+
+# temporary file that exists for a moment while progress is being saved
+*.tmp
+
+node_modules/
+.DS_Store
+Thumbs.db
