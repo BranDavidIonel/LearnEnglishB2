@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "english-levels",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["server.js"],
+      "port": 4747
+    },
+    {
+      "name": "english-levels-test",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["server.js", "--port=4848", "--profile=test"],
+      "port": 4848
+    }
+  ]
+}

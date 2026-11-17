@@ -1,0 +1,10 @@
+{
+  "name": "english-levels",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local app for learning English from A1 to B2 (for a Romanian speaker)",
+  "scripts": {
+    "start": "node server.js --open",
+    "validate": "node tools/validate.js"
+  }
+}

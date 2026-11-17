@@ -1,0 +1,308 @@
+{
+ "v": 1,
+ "xp": 390,
+ "goal": 50,
+ "streak": {
+  "count": 3,
+  "last": "2026-11-17"
+ },
+ "days": {
+  "2026-11-15": 104,
+  "2026-11-16": 116,
+  "2026-11-17": 170
+ },
+ "placement": {
+  "start": 2,
+  "scores": {
+   "a1": 0.8333333333333334,
+   "a2": 0.75,
+   "b1": 0.5833333333333334
+  },
+  "date": "2026-11-15"
+ },
+ "units": {
+  "b1-u01": {
+   "steps": {
+    "dialogue": true,
+    "vocab": true,
+    "grammar": true,
+    "practice": true,
+    "reading": true
+   },
+   "best": 0.9166666666666666,
+   "passed": true,
+   "review": false,
+   "tries": 1
+  },
+  "b1-u02": {
+   "steps": {
+    "vocab": true,
+    "grammar": true,
+    "dialogue": true,
+    "practice": true,
+    "reading": true
+   },
+   "best": 0.8333333333333334,
+   "passed": true,
+   "review": false,
+   "tries": 1
+  }
+ },
+ "exams": {},
+ "words": {
+  "be in charge of": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "colleague": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "customer": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "feature": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "maintain": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "reliable": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "hard-working": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "outgoing": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "easy-going": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "headquarters": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "startup": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "deal with": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "set up": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "currently": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "patient": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "own": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "workload": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "CV": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "job interview": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "apply for": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "experience": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "skill": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "degree": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "employer": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "position": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "salary": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "get promoted": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "achievement": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "strength": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "weakness": {
+   "box": 1,
+   "due": 20775,
+   "ok": 1,
+   "bad": 0
+  },
+  "resign": {
+   "box": 0,
+   "due": 20774,
+   "ok": 0,
+   "bad": 0
+  },
+  "career": {
+   "box": 0,
+   "due": 20774,
+   "ok": 0,
+   "bad": 0
+  },
+  "so far": {
+   "box": 0,
+   "due": 20774,
+   "ok": 0,
+   "bad": 0
+  },
+  "take on": {
+   "box": 0,
+   "due": 20774,
+   "ok": 0,
+   "bad": 0
+  }
+ },
+ "mistakes": [
+  "b1-u02:16",
+  "b1-u02:17",
+  "b1-u02:14"
+ ],
+ "games": {
+  "memory": 36,
+  "sprint": 16
+ },
+ "settings": {
+  "theme": "light",
+  "rate": 0.9,
+  "voice": null,
+  "sound": true
+ },
+ "history": {
+  "2026-11-15": {
+   "xp": 104,
+   "w": 0,
+   "b1": 68.1,
+   "b2": 51.1
+  },
+  "2026-11-16": {
+   "xp": 220,
+   "w": 0,
+   "b1": 69.7,
+   "b2": 52.3
+  },
+  "2026-11-17": {
+   "xp": 390,
+   "w": 0,
+   "b1": 72.7,
+   "b2": 54.5
+  }
+ },
+ "cambridge": {
+  "pet": {
+   "pet-test1": {},
+   "pet-test2": {}
+  }
+ },
+ "speak": {
+  "said": 15,
+  "scen": {
+   "role-b1-u01": 0.85
+  },
+  "best": {
+   "sprint": 7
+  }
+ }
+}
