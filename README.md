@@ -20,7 +20,7 @@ It is organised in levels: each unit ends with a test and each level with an exa
 ## What's inside
 
 - **A1 → B2 course:** 40 units, 10 per level. Each has new words, grammar explained in Romanian, a dialogue, exercises, a reading text and a final test.
-- **Content:** about 2,950 words (a CEFR-sized vocabulary: ~600 by the end of A1, ~1,200 by A2, ~2,000 by B1, ~3,000 by B2), 960 exercises of 6 types (multiple choice, fill the gap, word order, translation, dictation, matching pairs) and 37 recommended videos.
+- **Content:** about 2,950 words (a CEFR-sized vocabulary: ~600 by the end of A1, ~1,200 by A2, ~2,000 by B1, ~3,000 by B2), 960 exercises of 6 types (multiple choice, fill the gap, word order, translation, dictation, matching pairs) and 40 recommended videos (one per unit, each with a presenter on camera).
 - **Placement test** at the start, so you can skip what you already know.
 - **Speaking:**
   - 32 conversations (client, interview, negotiation, hotel, airport);
