@@ -9,6 +9,7 @@ import * as wordlist from './views/wordlist.js';
 import * as speaking from './views/speaking.js';
 import * as cambridge from './views/cambridge.js';
 import * as settings from './views/settings.js';
+import * as bank from './views/bank.js';
 
 const routes = [
   [/^\/?$/, home.dashboard, 'home'],
@@ -20,6 +21,7 @@ const routes = [
   [/^\/speak(?:\/(\w+))?(?:\/([\w-]+))?$/, speaking.view, 'speak'],
   [/^\/cards$/, words.cardsView, 'cards'],
   [/^\/words$/, wordlist.wordsView, 'words'],
+  [/^\/sort\/(\w+)$/, bank.sortView, 'words'],
   [/^\/grammar(?:\/([\w-]+))?$/, words.grammarView, 'grammar'],
   [/^\/videos$/, words.videosView, 'videos'],
   [/^\/games(?:\/(\w+))?$/, words.gamesView, 'games'],

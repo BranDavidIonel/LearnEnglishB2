@@ -119,6 +119,54 @@ function checkUnit(f, u, lvl, n, seenWords) {
   }
 }
 
+// ---- word banks (bankNN.json next to unitNN.json) ----
+// Every unit ends up with this many words in total (core vocab + bank): 600 / 1200 / 2000 / 3000 by the end of A1 / A2 / B1 / B2.
+const UNIT_WORDS = { A1: 60, A2: 60, B1: 80, B2: 100 };
+const pad = (n) => String(n).padStart(2, '0');
+const readOr = (p) => { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch { return null; } };
+// all words of the whole course, so a bank word is never a repeat of a word from any level
+const coreWords = new Map();
+for (const l of ['a1', 'a2', 'b1', 'b2']) {
+  for (let n = 1; n <= 10; n++) {
+    const u = readOr(path.join(ROOT, l, `unit${pad(n)}.json`));
+    if (u && Array.isArray(u.vocab)) u.vocab.forEach((v) => { const k = String(v.en).toLowerCase(); if (!coreWords.has(k)) coreWords.set(k, `${l}/unit${pad(n)}.json`); });
+  }
+}
+const bankSeen = new Map();
+for (const l of ['a1', 'a2', 'b1', 'b2']) { // banks of the levels before the checked one count too
+  if (l === levels[0]) break;
+  for (let n = 1; n <= 10; n++) {
+    const b = readOr(path.join(ROOT, l, `bank${pad(n)}.json`));
+    if (b && Array.isArray(b.words)) b.words.forEach((w) => bankSeen.set(String(w.en).toLowerCase(), `${l}/bank${pad(n)}.json`));
+  }
+}
+
+function checkBank(lvl, n) {
+  const L = lvl.toUpperCase();
+  const f = `${lvl}/bank${pad(n)}.json`;
+  const p = path.join(ROOT, lvl, `bank${pad(n)}.json`);
+  if (!fs.existsSync(p)) return warn(f, 'file missing (the unit has no word bank)');
+  let b;
+  try { b = JSON.parse(fs.readFileSync(p, 'utf8')); } catch (e) { return err(f, `invalid JSON: ${e.message}`); }
+  const id = `${lvl}-u${pad(n)}`;
+  if (b.unit !== id) err(f, `unit must be "${id}"`);
+  if (!Array.isArray(b.words) || !b.words.length) return err(f, 'needs a words[] array');
+  const u = readOr(path.join(ROOT, lvl, `unit${pad(n)}.json`));
+  const want = u && Array.isArray(u.vocab) ? UNIT_WORDS[L] - u.vocab.length : null;
+  if (want !== null && b.words.length !== want) warn(f, `has ${b.words.length} words, expected ${want} (unit total ${UNIT_WORDS[L]})`);
+  b.words.forEach((v, i) => {
+    for (const k of ['en', 'ro', 'ipa', 'emoji', 'ex', 'exRo']) if (!str(v[k])) err(f, `words[${i}] missing ${k}`);
+    if (!POS.includes(v.pos)) err(f, `words[${i}] bad pos "${v.pos}"`);
+    if (v.wiki !== undefined && !str(v.wiki)) err(f, `words[${i}] empty wiki`);
+    if (str(v.ipa) && !/^\/.+\/$/.test(v.ipa.trim())) err(f, `words[${i}] ipa must look like /.../`);
+    if (str(v.en) && v.en !== v.en.trim()) err(f, `words[${i}] en has extra spaces`);
+    const key = String(v.en).toLowerCase();
+    if (coreWords.has(key)) err(f, `"${v.en}" is already a core word in ${coreWords.get(key)}`);
+    else if (bankSeen.has(key)) err(f, `"${v.en}" is already in ${bankSeen.get(key)}`);
+    else bankSeen.set(key, f);
+  });
+}
+
 for (const lvl of levels) {
   console.log(`\n== ${lvl.toUpperCase()} ==`);
   const dir = path.join(ROOT, lvl);
@@ -132,6 +180,7 @@ for (const lvl of levels) {
     let u;
     try { u = JSON.parse(fs.readFileSync(p, 'utf8')); } catch (e) { err(f, `invalid JSON: ${e.message}`); continue; }
     try { checkUnit(f, u, lvl, n, seen); } catch (e) { err(f, `crashed while checking: ${e.message}`); }
+    try { checkBank(lvl, n); } catch (e) { err(`${lvl}/bank${pad(n)}.json`, `crashed while checking: ${e.message}`); }
   }
   const pf = `${lvl}/placement.json`;
   const pp = path.join(dir, 'placement.json');

@@ -3,8 +3,9 @@ import { h } from '../util.js';
 import {
   S, streak, xpToday, nextAction, currentLevel, achieved, progressTo, levelProgress,
   levelUnlocked, levelDone, levelPassed, levelSkipped, unitUnlocked, unitProgress, reviewUnits, dueWords, wordCounts,
-  badges, mistakeItems, PASS,
+  badges, mistakeItems, PASS, vocabTo, levelWords, countWords, wordsToLearn, nextWordsLevel,
 } from '../store.js';
+import { vocabGoal, BATCH } from './bank.js';
 import { ring, bar, chip, header, btn, pct, weekChart, go } from '../ui.js';
 import { progressChart } from '../chart.js';
 import { L, plural } from '../i18n.js';
@@ -62,7 +63,31 @@ export function roadCard() {
         const v = progressTo(id);
         const lv = S.levels.find((l) => l.id === id);
         return h('div.to-goal', h('div.row.between', h('span', L(`Drumul parcurs până la ${lv.name}`, `Progress towards ${lv.name}`)), h('strong', pct(v) + '%')), bar(v, lv.color));
-      })));
+      }),
+      ['b1', 'b2'].map((id) => { const lv = S.levels.find((l) => l.id === id); return lv ? vocabGoal(vocabTo(id), lv) : null; })));
+}
+
+/** "Learn 20 new words": the next words to learn, from the earliest level that still has some. */
+function wordsCard() {
+  const lv = nextWordsLevel();
+  const cur = currentLevel();
+  if (!lv || !cur) return null;
+  const left = wordsToLearn(lv).length;
+  const goal = vocabTo(cur.id);
+  return h('div.card.words-card', { style: `--c:${lv.color}` },
+    h('div.stat-icon', '📚'),
+    h('div.grow',
+      h('h3', L(`Cuvinte pentru ${cur.name}: ${goal.learned} / ${goal.total}`, `Words for ${cur.name}: ${goal.learned} / ${goal.total}`)),
+      h('p.muted', L(`Mai ai ${left} de parcurs la ${lv.name}. Câte ${BATCH} pe zi te duc la vocabularul real al nivelului.`, `${left} left to go through at ${lv.name}. ${BATCH} a day gets you to the real vocabulary of the level.`)),
+      bar(goal.total ? goal.learned / goal.total : 0, cur.color)),
+    btn(L(`▶ Învață ${Math.min(BATCH, left)} cuvinte`, `▶ Learn ${Math.min(BATCH, left)} words`), `#/sort/${lv.id}`, 'primary'));
+}
+
+function levelWordsLine(lv, unlocked) {
+  const c = countWords(levelWords(lv));
+  if (!c.total) return null;
+  return h('p.small.level-words', '📚 ', L(`Cuvinte ${lv.name}: ${c.learned} / ${c.total} învățate`, `${lv.name} words: ${c.learned} / ${c.total} learned`),
+    unlocked && wordsToLearn(lv).length ? [' · ', h('a', { href: `#/sort/${lv.id}` }, L('învață-le câte 20 →', 'learn them 20 at a time →'))] : null);
 }
 
 export function dashboard(main) {
@@ -74,6 +99,7 @@ export function dashboard(main) {
   main.append(
     h('div.dash',
       nextCard(),
+      wordsCard(),
       h('div.stats',
         h('div.card.stat', h('div.stat-icon', '🔥'), h('div.stat-num', st), h('div.muted', st === 1 ? L('zi la rând', 'day streak') : L('zile la rând', 'day streak'))),
         h('div.card.stat', ring(Math.min(1, xpToday() / p.goal), '#facc15', '⚡', 56), h('div.stat-num', `${xpToday()} / ${p.goal}`), h('div.muted', L('XP azi', 'XP today'))),
@@ -101,7 +127,8 @@ export function learn(main) {
     const sec = h('section.level' + (unlocked ? '' : '.locked'), { style: `--c:${lv.color}` },
       h('div.level-head',
         ring(levelProgress(lv), lv.color, lv.name, 76),
-        h('div.grow', h('h2', `${lv.name} · ${lv.title}`, ' ', state), h('p.muted', lv.desc), bar(levelProgress(lv), lv.color))));
+        h('div.grow', h('h2', `${lv.name} · ${lv.title}`, ' ', state), h('p.muted', lv.desc), bar(levelProgress(lv), lv.color),
+          levelWordsLine(lv, unlocked))));
     if (!lv.units.length) sec.append(h('p.muted', L('Lecțiile pentru acest nivel nu sunt încă disponibile.', 'Lessons for this level are not available yet.')));
     else if (!unlocked) {
       const prev = S.levels[lv.index - 1];

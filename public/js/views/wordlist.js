@@ -11,17 +11,36 @@ const STATUS = {
 };
 const nWords = (n) => `${n} ${plural(n, L('cuvânt', 'word'), L('cuvinte', 'words'))}`;
 
+/** One row of a word list: status, how well you know it, and the quick actions. `draw` redraws the list after a change. */
+export function wordRow(w, draw) {
+  const act = (icon, title, fn) => h('button.icon-btn.word-act', { title, 'aria-label': title, onclick: (e) => { e.stopPropagation(); fn(); save(); draw(); } }, icon);
+  const st = wordStatus(w.en);
+  const [label, cls] = STATUS[st];
+  const box = (S.p.words[w.en] || {}).box || 0;
+  return h('div.word-row', { onclick: () => wordModal(w, draw) },
+    h('span.word-emoji', w.emoji), h('span.word-en', h('strong', w.en), h('small.muted', w.ipa)),
+    h('span.word-ro', w.ro), levelChip(w.levelId), chip(label, cls),
+    h('span.word-box', { title: L('Cât de bine îl știi', 'How well you know it') }, [0, 1, 2, 3].map((n) => h('i' + (S.p.words[w.en] && box > n ? '.on' : '')))),
+    h('span.word-acts',
+      st === 'learned'
+        ? act('↺', L('Nu-l mai știu — vreau să-l repet', "I've forgotten it — practise it again"), () => learnWord(w.en))
+        : [act('✓', L('Îl știu deja', 'I already know it'), () => markKnown(w.en)),
+          h('button.icon-btn.word-act', { title: L('Învață-l acum', 'Learn it now'), 'aria-label': L('Învață-l acum', 'Learn it now'), onclick: (e) => { e.stopPropagation(); wordModal(w, draw, true); } }, '🧠')],
+      speakBtn(w.en)));
+}
+
+const PAGE = 300;
+
 export function wordsView(main) {
-  let fStatus = 'all', fLevel = 'all', q = '';
+  let fStatus = 'all', fLevel = 'all', q = '', limit = PAGE;
   const all = Object.values(S.wordIndex);
   const progress = h('div.card');
   const banner = h('div');
   const tabs = h('div.tabs');
   const list = h('div.word-list');
+  const more = h('div.row.center.mt');
   const count = h('span.muted');
   const bulk = h('span');
-
-  const act = (icon, title, fn) => h('button.icon-btn.word-act', { title, 'aria-label': title, onclick: (e) => { e.stopPropagation(); fn(); save(); draw(); } }, icon);
 
   function draw() {
     const wc = wordCounts();
@@ -34,14 +53,15 @@ export function wordsView(main) {
     const flags = S.p.flags || (S.p.flags = {});
     banner.replaceChildren(skipped.length && !flags.keepSkippedWords ? h('div.card.notice',
       h('div', h('strong', L('Ai sărit peste niveluri la testul de nivel.', 'You skipped levels in the placement test.')), ' ',
-        L(`Marchez cele ${nWords(skipped.length)} din nivelurile de dinainte ca știute? (Le poți schimba oricând, cuvânt cu cuvânt.)`,
-          `Shall I mark the ${nWords(skipped.length)} from the earlier levels as known? (You can change any of them later.)`)),
+        L(`Ai ${nWords(skipped.length)} din nivelurile de dinainte încă „de învățat”. Cel mai corect e să le verifici rapid, câte 20: le vezi, spui dacă le știai, iar cele noi intră la cartonașe. Sau le marchezi pe toate ca știute (le poți schimba oricând, cuvânt cu cuvânt).`,
+          `${nWords(skipped.length)} from the earlier levels are still “to learn”. The honest way is a quick check, 20 at a time: see each word, say whether you knew it, and the new ones go into your flashcards. Or mark them all as known (you can change any of them later).`)),
       h('div.row.wrap',
-        h('button.btn.success', { onclick: () => { skipped.forEach((w) => markKnown(w.en)); save(); toast(L(`${nWords(skipped.length)} marcate ca știute ✓`, `${nWords(skipped.length)} marked as known ✓`)); draw(); } }, L('✓ Da, le știu', '✓ Yes, I know them')),
+        h('a.btn.primary', { href: `#/sort/${skipped[0].levelId}` }, L('🔎 Verifică-le rapid: știu / nu știu', "🔎 Check them quickly: know / don't know")),
+        h('button.btn.success', { onclick: () => { skipped.forEach((w) => markKnown(w.en)); save(); toast(L(`${nWords(skipped.length)} marcate ca știute ✓`, `${nWords(skipped.length)} marked as known ✓`)); draw(); } }, L('✓ Da, le știu pe toate', '✓ Yes, I know them all')),
         h('button.btn', { onclick: () => { flags.keepSkippedWords = true; save(); draw(); } }, L('Nu, vreau să le parcurg', 'No, I want to go through them')))) : null);
 
     tabs.replaceChildren(...[['all', L('Toate', 'All'), wc.total], ['learned', L('✅ Învățate', '✅ Learned'), wc.learned], ['learning', L('🌱 În curs', '🌱 Learning'), wc.learning], ['new', L('🆕 De învățat', '🆕 To learn'), wc.new]]
-      .map(([k, label, n]) => h('button.tab' + (k === fStatus ? '.on' : ''), { onclick: () => { fStatus = k; draw(); } }, `${label} (${n})`)));
+      .map(([k, label, n]) => h('button.tab' + (k === fStatus ? '.on' : ''), { onclick: () => { fStatus = k; limit = PAGE; draw(); } }, `${label} (${n})`)));
 
     const rows = all.filter((w) => (fStatus === 'all' || wordStatus(w.en) === fStatus) && (fLevel === 'all' || w.levelId === fLevel)
       && (!q || w.en.toLowerCase().includes(q) || w.ro.toLowerCase().includes(q)));
@@ -52,23 +72,12 @@ export function wordsView(main) {
       notKnown.forEach((w) => markKnown(w.en)); save(); draw();
     } }, L(`✓ Le știu pe toate (${notKnown.length})`, `✓ I know all of these (${notKnown.length})`)) : null);
 
-    list.replaceChildren(...rows.slice(0, 700).map((w) => {
-      const st = wordStatus(w.en);
-      const [label, cls] = STATUS[st];
-      const box = (S.p.words[w.en] || {}).box || 0;
-      return h('div.word-row', { onclick: () => wordModal(w, draw) },
-        h('span.word-emoji', w.emoji), h('span.word-en', h('strong', w.en), h('small.muted', w.ipa)),
-        h('span.word-ro', w.ro), levelChip(w.levelId), chip(label, cls),
-        h('span.word-box', { title: L('Cât de bine îl știi', 'How well you know it') }, [0, 1, 2, 3].map((n) => h('i' + (S.p.words[w.en] && box > n ? '.on' : '')))),
-        h('span.word-acts',
-          st === 'learned'
-            ? act('↺', L('Nu-l mai știu — vreau să-l repet', "I've forgotten it — practise it again"), () => learnWord(w.en))
-            : [act('✓', L('Îl știu deja', 'I already know it'), () => markKnown(w.en)),
-              h('button.icon-btn.word-act', { title: L('Învață-l acum', 'Learn it now'), 'aria-label': L('Învață-l acum', 'Learn it now'), onclick: (e) => { e.stopPropagation(); wordModal(w, draw, true); } }, '🧠')],
-          speakBtn(w.en)));
-    }));
+    list.replaceChildren(...rows.slice(0, limit).map((w) => wordRow(w, draw)));
     if (!rows.length) list.append(h('p.muted.center', L('Niciun cuvânt pentru filtrele alese.', 'No words match these filters.')));
+    more.replaceChildren(rows.length > limit ? h('button.btn', { onclick: () => { limit += PAGE; draw(); } },
+      L(`Arată mai multe (încă ${rows.length - limit})`, `Show more (${rows.length - limit} left)`)) : null);
   }
+  const refilter = (fn) => (e) => { fn(e); limit = PAGE; draw(); };
 
   main.append(
     header(L('📖 Cuvintele mele', '📖 My words'),
@@ -76,16 +85,16 @@ export function wordsView(main) {
         `A word becomes “learned” after you know it ${LEARNED_BOX} times in a row on the flashcards — or when you say you already know it.`), '#/'),
     progress, banner, tabs,
     h('div.row.wrap.filters',
-      h('input.search', { type: 'search', placeholder: L('🔍 Caută în engleză sau română…', '🔍 Search in English or Romanian…'), oninput: (e) => { q = e.target.value.trim().toLowerCase(); draw(); } }),
-      h('select', { onchange: (e) => { fLevel = e.target.value; draw(); } }, h('option', { value: 'all' }, L('Toate nivelurile', 'All levels')), S.levels.map((l) => h('option', { value: l.id }, l.name))),
+      h('input.search', { type: 'search', placeholder: L('🔍 Caută în engleză sau română…', '🔍 Search in English or Romanian…'), oninput: refilter((e) => { q = e.target.value.trim().toLowerCase(); }) }),
+      h('select', { onchange: refilter((e) => { fLevel = e.target.value; }) }, h('option', { value: 'all' }, L('Toate nivelurile', 'All levels')), S.levels.map((l) => h('option', { value: l.id }, l.name))),
       count, bulk),
     h('p.muted.small', L('✓ = îl știu deja · 🧠 = învață-l acum · ↺ = vreau să-l repet · apasă pe un rând pentru detalii', '✓ = I already know it · 🧠 = learn it now · ↺ = practise it again · click a row for details')),
-    list);
+    list, more);
   draw();
 }
 
 /** Word details. With learn = true it opens straight into the three-step mini lesson. */
-function wordModal(w, onChange, learn = false) {
+export function wordModal(w, onChange, learn = false) {
   const u = S.unitById[w.unit];
   const body = h('div');
   const close = modal(body);

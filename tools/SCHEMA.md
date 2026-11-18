@@ -119,6 +119,42 @@ About half of the exercises must practise the unit's grammar, the rest its vocab
 Exercises must be answerable using only what this unit (and earlier units) taught.
 Never write an exercise with two defensible answers unless both are in `answers`.
 
+## Word bank (`bank01.json` … `bank10.json`)
+
+Next to every `unitNN.json` there is a `bankNN.json` with the unit's **extra words**: common words of
+the level that the learner goes through 20 at a time ("I knew it" / "new for me") and that then live in the
+flashcards. They are not needed to pass the unit; they exist so that the course really reaches a CEFR-sized
+vocabulary. Each unit has this many words in total (core `vocab` + bank):
+
+| Level | Words per unit | Cumulative by the end of the level |
+|---|---|---|
+| A1 | 60 | 600 |
+| A2 | 60 | 1,200 |
+| B1 | 80 | 2,000 |
+| B2 | 100 | 3,000 |
+
+```jsonc
+{
+  "unit": "b1-u03",
+  "words": [                   // UNIT_WORDS[level] − vocab.length items
+    {                          // same fields as a vocab item
+      "en": "hobby",           // UNIQUE across the WHOLE course (all levels, core words and banks)
+      "ro": "hobby, pasiune",
+      "pos": "noun",
+      "ipa": "/ˈhɒb.i/",
+      "emoji": "🎨",
+      "wiki": "Hobby",         // OPTIONAL, concrete picturable things only
+      "ex": "Climbing has become my favourite hobby.",
+      "exRo": "Escalada a devenit hobby-ul meu preferat."
+    }
+  ]
+}
+```
+
+Roughly half the words follow the unit's topic; the other half are general high-frequency words of the
+level, placed in the unit where they fit best. `node tools/validate.js` checks the fields, the count and
+that no word repeats anywhere in the course.
+
 ## placement.json
 
 ```jsonc

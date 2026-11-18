@@ -20,7 +20,7 @@ It is organised in levels: each unit ends with a test and each level with an exa
 ## What's inside
 
 - **A1 → B2 course:** 40 units, 10 per level. Each has new words, grammar explained in Romanian, a dialogue, exercises, a reading text and a final test.
-- **Content:** about 614 words, 960 exercises of 6 types (multiple choice, fill the gap, word order, translation, dictation, matching pairs) and 37 recommended videos.
+- **Content:** about 2,950 words (a CEFR-sized vocabulary: ~600 by the end of A1, ~1,200 by A2, ~2,000 by B1, ~3,000 by B2), 960 exercises of 6 types (multiple choice, fill the gap, word order, translation, dictation, matching pairs) and 37 recommended videos.
 - **Placement test** at the start, so you can skip what you already know.
 - **Speaking:**
   - 32 conversations (client, interview, negotiation, hotel, airport);
@@ -29,7 +29,8 @@ It is organised in levels: each unit ends with a test and each level with an exa
   - sound-alike word pairs (*ship / sheep*);
   - a voice sprint;
   - role-play from the lesson dialogues.
-- **Flashcards** with spaced repetition and a list of every word, where you can mark what you already know.
+- **Word bank** in every unit: besides its 16–18 core words, each unit has 40–85 more common words of its level. You go through them 20 at a time ("I knew it" / "new for me"); the new ones go into the flashcards, the known ones come back once a week later as a check.
+- **Flashcards** with spaced repetition and a list of every word, where you can mark what you already know or check a whole level quickly.
 - **Word games**, a "My mistakes" page, achievements and a daily goal.
 - **Cambridge:** 2 full mock exams each for B1 Preliminary (PET) and B2 First (FCE), with an "am I ready?" indicator.
 - **Settings:** interface language (EN / RO, English by default), 4 colour themes, voice and a microphone test.
@@ -75,7 +76,7 @@ public/                   the app that runs in the browser
   js/views/               the pages: lessons, speaking, words, Cambridge, settings…
   js/i18n.js              interface translations: L('română', 'English')
 data/
-  a1/ a2/ b1/ b2/         unit01–10.json, placement.json, speaking.json
+  a1/ a2/ b1/ b2/         unit01–10.json, bank01–10.json (word banks), placement.json, speaking.json
   cambridge/pet|fce/      the mock exams
 tools/                    content format (SCHEMA*.md) and validators
 user/progress.json        your progress

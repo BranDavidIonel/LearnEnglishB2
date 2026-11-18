@@ -23,7 +23,7 @@ export const LEARNED_BOX = 3;
 
 export const S = { levels: [], unitById: {}, wordIndex: {}, p: null, serverOld: false };
 /** The server version these pages need (see API in server.js). */
-const API_NEEDED = 2;
+const API_NEEDED = 3;
 
 const fresh = () => ({
   v: 1, xp: 0, goal: 50, streak: { count: 0, last: null }, days: {},
@@ -44,7 +44,9 @@ export async function load() {
     lv.index = li; Object.assign(lv, LEVEL_INFO[lv.id]);
     lv.units.forEach((u, ui) => {
       u.levelId = lv.id; u.index = ui; S.unitById[u.id] = u;
+      u.bank = u.bank || [];
       u.vocab.forEach((w) => { if (!S.wordIndex[w.en]) S.wordIndex[w.en] = { ...w, unit: u.id, levelId: lv.id }; });
+      u.bank.forEach((w) => { if (!S.wordIndex[w.en]) S.wordIndex[w.en] = { ...w, unit: u.id, levelId: lv.id, bank: true }; });
     });
   });
   let saved = p && p.v ? p : null;
@@ -257,10 +259,40 @@ export function skippedLevelWords() {
   return Object.values(S.wordIndex).filter((w) => level(w.levelId).index < startIndex() && !S.p.words[w.en]);
 }
 
+/** "I knew it" in a quick sort: counts as learned and comes back on the flashcards in a week, as a check. */
+export function sortedKnown(en) {
+  S.p.words[en] = { box: LEARNED_BOX, due: dayNum() + INTERVALS[LEARNED_BOX], ok: 1, bad: 0, known: true };
+}
+
 export function wordCounts() {
-  const c = { learned: 0, learning: 0, new: 0, total: 0 };
-  for (const en in S.wordIndex) { c[wordStatus(en)]++; c.total++; }
+  return countWords(Object.values(S.wordIndex));
+}
+/** { learned, learning, new, total } for a list of words. */
+export function countWords(ws) {
+  const c = { learned: 0, learning: 0, new: 0, total: ws.length };
+  for (const w of ws) c[wordStatus(w.en)]++;
   return c;
+}
+const uniq = (ws) => [...new Map(ws.map((w) => [w.en, w])).values()];
+/** The extra words of a unit (its "word bank"). */
+export const bankWords = (u) => u.bank.map((w) => S.wordIndex[w.en]).filter(Boolean);
+/** Every word a unit teaches: its core words first, then its word bank. */
+export const unitWords = (u) => uniq([...u.vocab, ...u.bank].map((w) => S.wordIndex[w.en]).filter(Boolean));
+/** Every word of a level, in course order. */
+export const levelWords = (lv) => uniq(lv.units.flatMap(unitWords));
+/** The vocabulary of level `id` and of all the levels before it — what "knowing B1 words" means. */
+export function vocabTo(id) {
+  const idx = S.levels.findIndex((l) => l.id === id);
+  return countWords(uniq(S.levels.slice(0, idx + 1).flatMap(levelWords)));
+}
+/** Words still "to learn" from the units the learner can open, in course order. */
+export function wordsToLearn(lv) {
+  return uniq(lv.units.filter(unitUnlocked).flatMap(unitWords)).filter((w) => wordStatus(w.en) === 'new');
+}
+/** The first level (up to the current one) that still has words to learn in its open units. */
+export function nextWordsLevel() {
+  const cur = currentLevel();
+  return S.levels.slice(0, (cur ? cur.index : 0) + 1).find((lv) => wordsToLearn(lv).length) || null;
 }
 /** Words the learner has met (or, if too few, words from open units) — used by games. */
 export function knownWords(min = 8) {
@@ -367,6 +399,10 @@ export function badges() {
     { icon: '🏅', name: L('O lună', 'One month'), desc: L('Învață 30 de zile consecutive', 'Study 30 days in a row'), ok: p.streak.count >= 30 },
     { icon: '🗂️', name: L('50 de cuvinte', '50 words'), desc: L('Învață 50 de cuvinte', 'Learn 50 words'), ok: wc.learned >= 50 },
     { icon: '🧠', name: L('200 de cuvinte', '200 words'), desc: L('Învață 200 de cuvinte', 'Learn 200 words'), ok: wc.learned >= 200 },
+    { icon: '📘', name: L('500 de cuvinte', '500 words'), desc: L('Vocabular de nivel A1', 'An A1-sized vocabulary'), ok: wc.learned >= 500 },
+    { icon: '📙', name: L('1000 de cuvinte', '1000 words'), desc: L('Vocabular de nivel A2', 'An A2-sized vocabulary'), ok: wc.learned >= 1000 },
+    { icon: '📕', name: L('2000 de cuvinte', '2000 words'), desc: L('Vocabular de nivel B1', 'A B1-sized vocabulary'), ok: wc.learned >= 2000 },
+    { icon: '📚', name: L('3000 de cuvinte', '3000 words'), desc: L('Vocabular de nivel B2', 'A B2-sized vocabulary'), ok: wc.learned >= 3000 },
     { icon: '💎', name: '1000 XP', desc: L('Strânge 1000 de puncte', 'Collect 1000 XP'), ok: p.xp >= 1000 },
     { icon: '🥉', name: L('Nivel A1', 'Level A1'), desc: L('Termină nivelul A1', 'Finish level A1'), ok: lvPassed('a1') },
     { icon: '🥈', name: L('Nivel A2', 'Level A2'), desc: L('Termină nivelul A2', 'Finish level A2'), ok: lvPassed('a2') },

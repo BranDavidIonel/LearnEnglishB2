@@ -18,7 +18,7 @@ const PROGRESS = path.join(USER_DIR, 'progress.json');
 const LEVELS = ['a1', 'a2', 'b1', 'b2'];
 // Raise this whenever the server starts sending something new that the pages need.
 // The page compares it with the version it expects and asks for a restart when the server is older.
-const API = 2;
+const API = 3;
 const URL_ = `http://localhost:${PORT}`;
 
 const MIME = {
@@ -38,7 +38,11 @@ function loadContent() {
     if (fs.existsSync(dir)) {
       for (const f of fs.readdirSync(dir).filter((n) => /^unit\d+\.json$/.test(n)).sort()) {
         const u = readJson(path.join(dir, f));
-        if (u && u.id && Array.isArray(u.vocab) && Array.isArray(u.exercises)) units.push(u);
+        if (!(u && u.id && Array.isArray(u.vocab) && Array.isArray(u.exercises))) continue;
+        // extra words of the unit ("word bank") live next to it: unit03.json → bank03.json
+        const bank = readJson(path.join(dir, f.replace(/^unit/, 'bank')));
+        u.bank = bank && Array.isArray(bank.words) ? bank.words : [];
+        units.push(u);
       }
     }
     units.sort((a, b) => a.order - b.order);

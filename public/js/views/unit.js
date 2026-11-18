@@ -1,12 +1,13 @@
 // A unit (6 steps), level exam, placement test, mistakes review.
 import { h, md, speak, stopSpeak, speakBtn, picture, shuffle, sample, confetti, sfx, canListen, listen, speechScore, toast, recorder, canRecord, MIC_FATAL } from '../util.js';
 import {
-  S, save, level, unitState, unitUnlocked, levelUnlocked, levelPassed, completeStep, recordUnitTest, buildExam, recordExam,
+  S, save, level, bankWords, countWords, unitState, unitUnlocked, levelUnlocked, levelPassed, completeStep, recordUnitTest, buildExam, recordExam,
   recordPlacement, reviewUnits, addMistake, clearMistake, mistakeItems, addXp, STEPS, PASS, PLACEMENT_PASS,
 } from '../store.js';
 import { runSession, resultCard } from '../exercise.js';
 import { header, btn, bar, chip, grammarNode, empty, pct, go } from '../ui.js';
 import { L, plural } from '../i18n.js';
+import { bankStep } from './bank.js';
 
 const STEP_INFO = {
   vocab: ['🗂️', L('Cuvinte noi', 'New words'), L('Vezi, ascultă și reține cuvintele unității', 'See, hear and remember the words of the unit')],
@@ -25,7 +26,7 @@ export function unitView(main, id, step) {
   const lv = level(u.levelId);
   if (!unitUnlocked(u)) return main.append(empty('🔒', L('Unitate blocată', 'Unit locked'), L('Termină întâi unitatea anterioară (testul cu minimum 80%).', 'Finish the previous unit first (its test with at least 80%).'), [btn(L('Înapoi la lecții', 'Back to lessons'), '#/learn', 'primary')]));
   if (!step) return overview(main, u, lv);
-  const steps = { vocab, grammar, dialogue, practice, reading, test };
+  const steps = { vocab, grammar, dialogue, practice, reading, test, bank: bankStep };
   if (!steps[step]) return go(`#/unit/${u.id}`);
   main.append(h('div.step-head', { style: `--c:${lv.color}` },
     h('a.back', { href: `#/unit/${u.id}` }, `← ${u.emoji} ${u.title}`),
@@ -47,11 +48,12 @@ function overview(main, u, lv) {
     h('div.steps', ORDER.map((s, i) => {
       const done = s === 'test' ? st.passed : !!st.steps[s];
       const [icon, name, desc] = STEP_INFO[s];
-      return h('a.step-row' + (done ? '.done' : ''), { href: `#/unit/${u.id}/${s}` },
+      return [h('a.step-row' + (done ? '.done' : ''), { href: `#/unit/${u.id}/${s}` },
         h('span.step-icon', icon),
         h('span.grow', h('strong', `${i + 1}. ${name}`), h('small.muted', s === 'grammar' ? u.grammar.titleRo : desc)),
         s === 'test' && st.best ? chip(L(`cel mai bun: ${pct(st.best)}%`, `best: ${pct(st.best)}%`), st.passed ? 'ok' : 'warn') : null,
-        h('span.step-check', done ? '✅' : '▶'));
+        h('span.step-check', done ? '✅' : '▶')),
+      s === 'vocab' ? bankRow(u, lv) : null];
     }),
     h('a.step-row.extra', { href: `#/speak/role/${u.id}` },
       h('span.step-icon', '🎭'),
@@ -59,6 +61,21 @@ function overview(main, u, lv) {
       (S.p.speak && S.p.speak.scen && S.p.speak.scen[`role-${u.id}`] !== undefined) ? chip(`${pct(S.p.speak.scen[`role-${u.id}`])}%`, 'ok') : null,
       h('span.step-check', '🎙'))),
     u.video ? videoCard(u) : null);
+}
+
+/** The unit's word bank: extra words learned in batches, next to "New words" (not needed to pass the unit). */
+function bankRow(u, lv) {
+  const ws = bankWords(u);
+  if (!ws.length) return null;
+  const c = countWords(ws);
+  const done = c.new === 0;
+  return h('a.step-row.bank-row' + (done ? '.done' : ''), { href: `#/unit/${u.id}/bank`, style: `--c:${lv.color}` },
+    h('span.step-icon', '📚'),
+    h('span.grow', h('strong', L(`1+. Banca de cuvinte: încă ${ws.length}`, `1+. Word bank: ${ws.length} more words`)),
+      h('small.muted', L(`Cuvinte uzuale de nivel ${lv.name}, câte 20 pe rând — așa ajungi la vocabularul real al nivelului`, `Common ${lv.name} words, 20 at a time — this is how you reach the real vocabulary of the level`)),
+      bar((c.learned + c.learning * 0.5) / c.total, lv.color)),
+    chip(`${c.learned} / ${c.total}`, c.learned === c.total ? 'ok' : c.learned + c.learning ? 'now' : 'lock'),
+    h('span.step-check', done ? '✅' : '▶'));
 }
 
 export function videoCard(u) {

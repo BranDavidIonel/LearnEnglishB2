@@ -445,3 +445,10 @@ a.mist-row:hover, a.gram-row:hover { outline: 1px solid var(--primary2); }
 .alert.server-old { max-width: none; margin: 0 22px 10px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .sprint-hint { text-align: center; color: var(--muted); font-size: 1.15rem; letter-spacing: .08em; font-family: ui-monospace, Consolas, monospace; margin: -6px 0 10px; min-height: 1.6em; white-space: pre-wrap; }
 .sprint-hint.shown { color: var(--up); font-weight: 800; font-size: 1.5rem; letter-spacing: 0; font-family: inherit; }
+
+/* word bank */
+.bank-row .bar { margin-top: 6px; max-width: 320px; }
+.words-card { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; border-left: 6px solid var(--c, var(--primary2)); }
+.words-card h3 { margin: 0 0 4px; }
+.words-card .grow { min-width: 220px; }
+.level-words { margin: 6px 0 0; color: var(--muted); }
