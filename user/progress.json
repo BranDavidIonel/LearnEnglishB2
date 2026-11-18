@@ -1,15 +1,16 @@
 {
  "v": 1,
- "xp": 390,
+ "xp": 420,
  "goal": 50,
  "streak": {
-  "count": 3,
-  "last": "2026-11-17"
+  "count": 4,
+  "last": "2026-11-18"
  },
  "days": {
   "2026-11-15": 104,
   "2026-11-16": 116,
-  "2026-11-17": 170
+  "2026-11-17": 170,
+  "2026-11-18": 30
  },
  "placement": {
   "start": 2,
@@ -46,6 +47,15 @@
    "passed": true,
    "review": false,
    "tries": 1
+  },
+  "b1-u03": {
+   "steps": {
+    "vocab": true
+   },
+   "best": 0,
+   "passed": false,
+   "review": false,
+   "tries": 0
   }
  },
  "exams": {},
@@ -63,10 +73,11 @@
    "bad": 0
   },
   "customer": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
-   "bad": 0
+   "box": 6,
+   "due": 20835,
+   "ok": 0,
+   "bad": 0,
+   "known": true
   },
   "feature": {
    "box": 1,
@@ -75,10 +86,11 @@
    "bad": 0
   },
   "maintain": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
-   "bad": 0
+   "box": 6,
+   "due": 20835,
+   "ok": 0,
+   "bad": 0,
+   "known": true
   },
   "reliable": {
    "box": 1,
@@ -111,10 +123,11 @@
    "bad": 0
   },
   "startup": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
-   "bad": 0
+   "box": 6,
+   "due": 20835,
+   "ok": 0,
+   "bad": 0,
+   "known": true
   },
   "deal with": {
    "box": 1,
@@ -123,10 +136,11 @@
    "bad": 0
   },
   "set up": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
-   "bad": 0
+   "box": 6,
+   "due": 20835,
+   "ok": 0,
+   "bad": 0,
+   "known": true
   },
   "currently": {
    "box": 1,
@@ -135,16 +149,18 @@
    "bad": 0
   },
   "patient": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
-   "bad": 0
+   "box": 6,
+   "due": 20835,
+   "ok": 0,
+   "bad": 0,
+   "known": true
   },
   "own": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
-   "bad": 0
+   "box": 6,
+   "due": 20835,
+   "ok": 0,
+   "bad": 0,
+   "known": true
   },
   "workload": {
    "box": 1,
@@ -153,10 +169,11 @@
    "bad": 0
   },
   "CV": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
-   "bad": 0
+   "box": 6,
+   "due": 20835,
+   "ok": 0,
+   "bad": 0,
+   "known": true
   },
   "job interview": {
    "box": 1,
@@ -177,10 +194,11 @@
    "bad": 0
   },
   "skill": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
-   "bad": 0
+   "box": 6,
+   "due": 20835,
+   "ok": 0,
+   "bad": 0,
+   "known": true
   },
   "degree": {
    "box": 1,
@@ -195,10 +213,11 @@
    "bad": 0
   },
   "position": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
-   "bad": 0
+   "box": 6,
+   "due": 20835,
+   "ok": 0,
+   "bad": 0,
+   "known": true
   },
   "salary": {
    "box": 1,
@@ -253,6 +272,248 @@
    "due": 20774,
    "ok": 0,
    "bad": 0
+  },
+  "hello": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "goodbye": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "good morning": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "good evening": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "name": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "nice to meet you": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "how are you?": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "fine": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "developer": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "teacher": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "doctor": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "student": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "project manager": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "client": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "freelancer": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "hi": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "good afternoon": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "good night": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "see you later": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "thank you": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "refactor": {
+   "box": 0,
+   "due": 20775,
+   "ok": 0,
+   "bad": 0
+  },
+  "migrate": {
+   "box": 0,
+   "due": 20775,
+   "ok": 0,
+   "bad": 0
+  },
+  "legacy code": {
+   "box": 0,
+   "due": 20775,
+   "ok": 0,
+   "bad": 0
+  },
+  "progress": {
+   "box": 0,
+   "due": 20775,
+   "ok": 0,
+   "bad": 0
+  },
+  "exhausted": {
+   "box": 0,
+   "due": 20775,
+   "ok": 0,
+   "bad": 0
+  },
+  "take up": {
+   "box": 0,
+   "due": 20775,
+   "ok": 0,
+   "bad": 0
+  },
+  "work out": {
+   "box": 0,
+   "due": 20775,
+   "ok": 0,
+   "bad": 0
+  },
+  "give up": {
+   "box": 0,
+   "due": 20775,
+   "ok": 0,
+   "bad": 0
+  },
+  "work-life balance": {
+   "box": 0,
+   "due": 20775,
+   "ok": 0,
+   "bad": 0
+  },
+  "side project": {
+   "box": 0,
+   "due": 20775,
+   "ok": 0,
+   "bad": 0
+  },
+  "climbing": {
+   "box": 0,
+   "due": 20775,
+   "ok": 0,
+   "bad": 0
+  },
+  "sourdough": {
+   "box": 0,
+   "due": 20775,
+   "ok": 0,
+   "bad": 0
+  },
+  "keep up with": {
+   "box": 0,
+   "due": 20775,
+   "ok": 0,
+   "bad": 0
+  },
+  "lately": {
+   "box": 0,
+   "due": 20775,
+   "ok": 0,
+   "bad": 0
+  },
+  "overtime": {
+   "box": 0,
+   "due": 20775,
+   "ok": 0,
+   "bad": 0
+  },
+  "struggle with": {
+   "box": 0,
+   "due": 20775,
+   "ok": 0,
+   "bad": 0
+  },
+  "burnout": {
+   "box": 0,
+   "due": 20775,
+   "ok": 0,
+   "bad": 0
   }
  },
  "mistakes": [
@@ -288,6 +549,12 @@
    "w": 0,
    "b1": 72.7,
    "b2": 54.5
+  },
+  "2026-11-18": {
+   "xp": 420,
+   "w": 29,
+   "b1": 73.1,
+   "b2": 54.9
   }
  },
  "cambridge": {
@@ -304,5 +571,6 @@
   "best": {
    "sprint": 7
   }
- }
+ },
+ "flags": {}
 }
