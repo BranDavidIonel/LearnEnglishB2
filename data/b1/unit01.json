@@ -128,5 +128,5 @@
     { "type": "listen", "audio": "He is very reliable and patient.", "answers": ["He is very reliable and patient.", "He's very reliable and patient."], "ro": "Este foarte de încredere și răbdător.", "explainRo": "„reliable” = de încredere, „patient” = răbdător." },
     { "type": "listen", "audio": "We are setting up a new server.", "answers": ["We are setting up a new server.", "We're setting up a new server."], "ro": "Configurăm un server nou.", "explainRo": "„set up” la present continuous: we are setting up." }
   ],
-  "video": { "youtubeId": "3aQOLTfnAOc", "title": "State verbs - 6 Minute Grammar (BBC Learning English)" }
+  "video": { "youtubeId": "OsW5sV3GMDM", "title": "Present Simple and Present Continuous: The Grammar Gameshow Episode 1 (BBC Learning English)" }
 }

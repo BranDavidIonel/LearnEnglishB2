@@ -126,5 +126,5 @@
     { "type": "listen", "audio": "Is it worth it?", "answers": ["Is it worth it?"], "ro": "Merită?", "explainRo": "„worth it” = merită (efortul sau banii)." },
     { "type": "listen", "audio": "My hourly rate is fifty euros.", "answers": ["My hourly rate is fifty euros.", "My hourly rate is 50 euros."], "ro": "Tariful meu pe oră este de cincizeci de euro.", "explainRo": "„hourly rate” = tarif pe oră." }
   ],
-  "video": { "youtubeId": "3OuqzHxlrHc", "title": "The second conditional - 6 Minute Grammar (BBC Learning English)" }
+  "video": { "youtubeId": "FH3ThwR99LM", "title": "English Conditional Sentences (with examples!) (mmmEnglish)" }
 }

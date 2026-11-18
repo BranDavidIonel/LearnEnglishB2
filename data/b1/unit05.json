@@ -128,5 +128,5 @@
     { "type": "listen", "audio": "The kick-off meeting is on Monday.", "answers": ["The kick-off meeting is on Monday.", "The kickoff meeting is on Monday."], "ro": "Ședința de început de proiect este luni.", "explainRo": "„kick-off meeting” = prima ședință a unui proiect." },
     { "type": "listen", "audio": "We're going to go live in June.", "answers": ["We're going to go live in June.", "We are going to go live in June."], "ro": "Vom intra în producție în iunie.", "explainRo": "Plan hotărât → be going to + go live." }
   ],
-  "video": { "youtubeId": "jcAX1RtKq3U", "title": "Talking about the future - 6 Minute Grammar (BBC Learning English)" }
+  "video": { "youtubeId": "2LSBme2M4Qo", "title": "ALL Future Tenses in English! (Will, Going To, Be + ing & More) (Papa Teach Me)" }
 }

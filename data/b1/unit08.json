@@ -129,5 +129,5 @@
     { "type": "listen", "audio": "Invoices are generated automatically.", "answers": ["Invoices are generated automatically."], "ro": "Facturile sunt generate automat.", "explainRo": "Pasiv la present simple: are generated." },
     { "type": "listen", "audio": "The barcode is scanned in the warehouse.", "answers": ["The barcode is scanned in the warehouse."], "ro": "Codul de bare este scanat în depozit.", "explainRo": "Pasiv: is + scanned (cu dublarea lui n)." }
   ],
-  "video": { "youtubeId": "nI5zaB6QL-o", "title": "Present and past passives - 6 Minute Grammar (BBC Learning English)" }
+  "video": { "youtubeId": "nqSD7LB8HVY", "title": "Using PASSIVE in English to avoid responsibility (English with Emma · engVid)" }
 }

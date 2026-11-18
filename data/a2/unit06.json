@@ -119,5 +119,9 @@
     { "type": "order", "words": ["The", "app", "won't", "be", "ready", "in", "May."], "ro": "Aplicația nu va fi gata în mai.", "explainRo": "Won't + be – predicție negativă." },
     { "type": "translate", "ro": "Îți promit că o să termin azi.", "answers": ["I promise I'll finish today.", "I promise I will finish today.", "I promise that I'll finish today.", "I promise that I will finish today.", "I promise I'll finish it today.", "I promise I will finish it today.", "I promise that I'll finish it today.", "I promise that I will finish it today."], "explainRo": "Promisiune: I promise + I'll (I will) + verb." },
     { "type": "translate", "ro": "Probabil va ploua mâine.", "answers": ["It will probably rain tomorrow.", "It'll probably rain tomorrow.", "Tomorrow it will probably rain.", "It's probably going to rain tomorrow.", "It is probably going to rain tomorrow."], "explainRo": "Predicție: It will probably rain – probably stă după will." }
-  ]
+  ],
+  "video": {
+    "youtubeId": "uRO9jRcF7Ek",
+    "title": "Will: The Grammar Gameshow Episode 17 (BBC Learning English)"
+  }
 }

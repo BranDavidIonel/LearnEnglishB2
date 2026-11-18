@@ -117,5 +117,9 @@
     { "type": "order", "words": ["Are", "you", "going", "to", "cancel", "the", "meeting?"], "ro": "O să anulezi ședința?", "explainRo": "Întrebarea: Are + subiect + going to + verb?" },
     { "type": "translate", "ro": "O să rezerv un hotel pentru conferință.", "answers": ["I'm going to book a hotel for the conference.", "I am going to book a hotel for the conference.", "I'll book a hotel for the conference.", "I will book a hotel for the conference."], "explainRo": "„O să rezerv” = I'm going to book – un plan decis." },
     { "type": "translate", "ro": "Ce faci sâmbătă seara?", "answers": ["What are you doing on Saturday evening?", "What are you doing on Saturday night?", "What are you doing Saturday evening?", "What are you doing Saturday night?"], "explainRo": "Întrebăm despre planuri cu prezentul continuu: What are you doing...?" }
-  ]
+  ],
+  "video": {
+    "youtubeId": "OlyYE6USuO0",
+    "title": "Easy English 29 - Talking about the future (Easy English)"
+  }
 }

@@ -128,5 +128,5 @@
     { "type": "listen", "audio": "I have just updated my CV.", "answers": ["I have just updated my CV.", "I've just updated my CV."], "ro": "Tocmai mi-am actualizat CV-ul.", "explainRo": "„just” + present perfect = tocmai am făcut ceva." },
     { "type": "listen", "audio": "She resigned two weeks ago.", "answers": ["She resigned two weeks ago.", "She resigned 2 weeks ago."], "ro": "A demisionat acum două săptămâni.", "explainRo": "„ago” cere past simple: resigned." }
   ],
-  "video": { "youtubeId": "jwmKjgwlMk8", "title": "Present perfect and past simple - 6 Minute Grammar (BBC Learning English)" }
+  "video": { "youtubeId": "T09u75kiKGc", "title": "Present Perfect or Past Simple? - English Grammar lesson (Papa Teach Me)" }
 }

@@ -129,5 +129,9 @@
     { "type": "order", "words": ["She", "didn't", "get", "the", "promotion."], "ro": "Ea nu a primit promovarea.", "explainRo": "Didn't + get (forma de bază, nu got)." },
     { "type": "translate", "ro": "Ai studiat informatica?", "answers": ["Did you study computer science?", "Did you study IT?"], "explainRo": "Întrebare la trecut: Did + you + study; informatică = computer science." },
     { "type": "translate", "ro": "M-am mutat în Londra acum doi ani.", "answers": ["I moved to London two years ago.", "Two years ago I moved to London.", "Two years ago, I moved to London."], "explainRo": "„A se muta” = move (regulat: moved); „acum doi ani” = two years ago." }
-  ]
+  ],
+  "video": {
+    "youtubeId": "kTf0V4HyFtM",
+    "title": "Talk about what you did last weekend: Easy English Conversations 💬 Episode 13 (BBC Learning English)"
+  }
 }

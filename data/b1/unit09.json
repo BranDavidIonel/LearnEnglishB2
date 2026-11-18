@@ -128,5 +128,5 @@
     { "type": "listen", "audio": "She said the demo was great.", "answers": ["She said the demo was great.", "She said that the demo was great."], "ro": "A spus că demo-ul e grozav.", "explainRo": "„said” fără persoană după el; is devine was." },
     { "type": "listen", "audio": "He asked me to forward the email.", "answers": ["He asked me to forward the email."], "ro": "M-a rugat să redirecționez e-mailul.", "explainRo": "ask + persoană + to + verb: asked me to forward." }
   ],
-  "video": { "youtubeId": "L-wTVCByxzk", "title": "How to use reported speech - 6 Minute Grammar (BBC Learning English)" }
+  "video": { "youtubeId": "cetrtFDN2Zg", "title": "Reported Speech: The Grammar Gameshow Episode 25 (BBC Learning English)" }
 }
