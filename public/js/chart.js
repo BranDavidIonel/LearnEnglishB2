@@ -9,6 +9,7 @@ const dec = (v) => v.toLocaleString(locale, { minimumFractionDigits: 1, maximumF
 const METRICS = {
   xp: { tab: L('XP total', 'Total XP'), fmt: int, unit: ' XP', what: L('Puncte XP adunate', 'XP earned') },
   w: { tab: L('Cuvinte învățate', 'Words learned'), fmt: int, unit: '', what: L('Cuvinte învățate', 'Words learned') },
+  v: { tab: L('Verbe neregulate', 'Irregular verbs'), fmt: int, unit: '', what: L('Verbe neregulate învățate', 'Irregular verbs learned') },
   b1: { tab: L('Drumul spre B1', 'Road to B1'), fmt: dec, unit: '%', pp: true, what: L('Drumul parcurs până la B1', 'Progress towards B1') },
   b2: { tab: L('Drumul spre B2', 'Road to B2'), fmt: dec, unit: '%', pp: true, what: L('Drumul parcurs până la B2', 'Progress towards B2') },
 };

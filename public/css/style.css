@@ -452,3 +452,21 @@ a.mist-row:hover, a.gram-row:hover { outline: 1px solid var(--primary2); }
 .words-card h3 { margin: 0 0 4px; }
 .words-card .grow { min-width: 220px; }
 .level-words { margin: 6px 0 0; color: var(--muted); }
+
+/* irregular verbs */
+.tab-verbs { text-decoration: none; }
+.verb-forms { font-size: 1.9rem; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.verb-forms i { color: var(--muted); font-style: normal; font-weight: 400; }
+.verb-labels { display: flex; justify-content: center; gap: 18px; color: var(--muted); font-size: .78rem; font-weight: 700; margin: 2px 0 6px; }
+.verb-drill { max-width: 560px; margin: 0 auto; text-align: center; }
+.verb-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0 4px; }
+.verb-inputs label { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.verb-input { width: 100%; max-width: 220px; }
+.verb-results { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin: 10px 0; }
+.verb-result { padding: 4px 10px; border-radius: 99px; font-weight: 700; font-size: .9rem; border: 1px solid var(--border); }
+.verb-result.ok { color: var(--ok); border-color: var(--ok); }
+.verb-result.bad { color: var(--bad); border-color: var(--bad); }
+.verb-rank { font-size: .8rem; font-weight: 700; }
+.verb-help summary { cursor: pointer; font-weight: 700; }
+.verb-help p { margin: 8px 0 0; }
+@media (max-width: 560px) { .verb-inputs { grid-template-columns: 1fr; } .verb-forms { font-size: 1.5rem; } }

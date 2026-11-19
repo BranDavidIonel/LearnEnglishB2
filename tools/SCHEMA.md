@@ -176,6 +176,27 @@ and the same core words, in sentences, names and situations that appear nowhere 
 - Every `fill`/`translate`/`listen` lists all accepted answers (contractions and full forms); every `mc` has exactly
   one defensible answer.
 
+## Irregular verbs (`data/verbs.json`)
+
+One file for the whole course: every irregular verb in common use, **most used first** (the order is the order
+the learner meets them). Shown as a tab of the "My words" page; the learner types V2 and V3 from memory and the
+verbs come back with spaced repetition.
+
+```jsonc
+{
+  "verbs": [
+    {
+      "v1": "go", "v2": "went", "v3": "gone",   // alternatives with " / ": "learnt / learned" (any one is accepted)
+      "level": "A1",                            // A1 | A2 | B1 | B2 — how early a learner needs it
+      "ro": "a merge",                          // Romanian infinitive; short note for traps (lie/lay, hang/hanged)
+      "ipa": "/ɡəʊ/ – /went/ – /ɡɒn/",          // British, the three forms
+      "ex2": "We went to Rome for the weekend.",  "ex2Ro": "…",   // uses the past simple
+      "ex3": "The client has gone home already.", "ex3Ro": "…"    // uses the past participle
+    }
+  ]
+}
+```
+
 ## placement.json
 
 ```jsonc

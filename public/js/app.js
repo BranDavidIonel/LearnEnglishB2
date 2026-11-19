@@ -1,6 +1,6 @@
 // Entry point: loads data, draws the menu, routes between pages.
 import { h, stopSpeak } from './util.js';
-import { S, load, save, applySettings, streak, xpToday, dueWords, currentLevel, mistakeItems, THEMES } from './store.js';
+import { S, load, save, applySettings, streak, xpToday, dueWords, dueVerbs, currentLevel, mistakeItems, THEMES } from './store.js';
 import { L, lang, setLang } from './i18n.js';
 import * as home from './views/home.js';
 import * as unit from './views/unit.js';
@@ -10,6 +10,7 @@ import * as speaking from './views/speaking.js';
 import * as cambridge from './views/cambridge.js';
 import * as settings from './views/settings.js';
 import * as bank from './views/bank.js';
+import * as verbs from './views/verbs.js';
 
 const routes = [
   [/^\/?$/, home.dashboard, 'home'],
@@ -20,7 +21,8 @@ const routes = [
   [/^\/mistakes$/, unit.mistakesView, 'mistakes'],
   [/^\/speak(?:\/(\w+))?(?:\/([\w-]+))?$/, speaking.view, 'speak'],
   [/^\/cards$/, words.cardsView, 'cards'],
-  [/^\/words$/, wordlist.wordsView, 'words'],
+  [/^\/words\/verbs$/, verbs.verbsView, 'words'],
+  [/^\/words(?:\/(\w+))?$/, wordlist.wordsView, 'words'],
   [/^\/sort\/(\w+)$/, bank.sortView, 'words'],
   [/^\/grammar(?:\/([\w-]+))?$/, words.grammarView, 'grammar'],
   [/^\/videos$/, words.videosView, 'videos'],
@@ -64,7 +66,7 @@ function nextTheme() {
 }
 
 function drawNav() {
-  const badge = { cards: dueWords().length, mistakes: mistakeItems().length };
+  const badge = { cards: dueWords().length, mistakes: mistakeItems().length, words: dueVerbs().length };
   nav.replaceChildren(
     ...NAV.map((item) => navItem(item, badge[item[0]])),
     h('div.nav-gap'),

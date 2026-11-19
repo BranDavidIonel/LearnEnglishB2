@@ -3,7 +3,7 @@ import { h } from '../util.js';
 import {
   S, streak, xpToday, nextAction, currentLevel, achieved, progressTo, levelProgress,
   levelUnlocked, levelDone, levelPassed, levelSkipped, unitUnlocked, unitProgress, reviewUnits, dueWords, wordCounts,
-  badges, mistakeItems, PASS, vocabTo, levelWords, countWords, wordsToLearn, nextWordsLevel,
+  badges, mistakeItems, PASS, verbCounts, vocabTo, levelWords, countWords, wordsToLearn, nextWordsLevel,
 } from '../store.js';
 import { vocabGoal, BATCH } from './bank.js';
 import { ring, bar, chip, header, btn, pct, weekChart, go } from '../ui.js';
@@ -111,6 +111,7 @@ export function dashboard(main) {
         h('div.card', h('h3', L('⚡ Scurtături', '⚡ Shortcuts')),
           h('div.quick',
             h('a.quick-item', { href: '#/speak' }, '🗣️', h('span', L('Exersează vorbirea', 'Speaking practice'))),
+            h('a.quick-item', { href: '#/words/verbs' }, '🔁', h('span', L(`Verbe neregulate (${verbCounts().learned}/${S.verbs.length})`, `Irregular verbs (${verbCounts().learned}/${S.verbs.length})`))),
             h('a.quick-item', { href: '#/games' }, '🎮', h('span', L('Jocuri cu cuvinte', 'Word games'))),
             h('a.quick-item', { href: '#/mistakes' }, '🩹', h('span', L(`Greșelile mele${mist ? ` (${mist})` : ''}`, `My mistakes${mist ? ` (${mist})` : ''}`))),
             h('a.quick-item', { href: '#/videos' }, '🎬', h('span', L('Videouri', 'Videos'))),
@@ -176,7 +177,8 @@ export function progressView(main) {
       h('div.card.stat', h('div.stat-icon', '💎'), h('div.stat-num', p.xp), h('div.muted', L('XP în total', 'total XP'))),
       h('div.card.stat', h('div.stat-icon', '🔥'), h('div.stat-num', streak()), h('div.muted', L('zile la rând', 'day streak'))),
       h('div.card.stat', h('div.stat-icon', '📗'), h('div.stat-num', `${passedUnits}/${totalUnits}`), h('div.muted', L('unități trecute', 'units passed'))),
-      h('div.card.stat', h('div.stat-icon', '📖'), h('div.stat-num', `${wc.learned}`), h('div.muted', L(`învățate · ${wc.learning} în curs · ${wc.new} noi`, `learned · ${wc.learning} in progress · ${wc.new} new`)))),
+      h('div.card.stat', h('div.stat-icon', '📖'), h('div.stat-num', `${wc.learned}`), h('div.muted', L(`învățate · ${wc.learning} în curs · ${wc.new} noi`, `learned · ${wc.learning} in progress · ${wc.new} new`))),
+      h('a.card.stat.link', { href: '#/words/verbs' }, h('div.stat-icon', '🔁'), h('div.stat-num', `${verbCounts().learned}/${S.verbs.length}`), h('div.muted', L('verbe neregulate învățate', 'irregular verbs learned')))),
     h('div.card', h('h3', L('🏅 Realizări', '🏅 Achievements')),
       h('div.badges', badges().map((b) => h('div.badge' + (b.ok ? '.ok' : ''), { title: b.desc }, h('div.badge-icon', b.icon), h('strong', b.name), h('small.muted', b.desc))))),
     h('a.card.exam-card', { href: '#/settings' }, h('div.stat-icon', '⚙️'), h('div.grow', h('h3', L('Setări', 'Settings')), h('p.muted', L('Tema de culori, limba aplicației, vocea, obiectivul zilnic.', 'Colour theme, app language, voice, daily goal.'))), h('span.btn', L('Deschide →', 'Open →'))));

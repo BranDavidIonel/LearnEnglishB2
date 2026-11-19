@@ -30,6 +30,7 @@ It is organised in levels: each unit ends with a test and each level with an exa
   - a voice sprint;
   - role-play from the lesson dialogues.
 - **Word bank** in every unit: besides its 16–18 core words, each unit has 40–85 more common words of its level. You go through them 20 at a time ("I knew it" / "new for me"); the new ones go into the flashcards, the known ones come back once a week later as a check.
+- **Irregular verbs:** about 180 verbs with their three forms (go – went – gone), most used first, as a tab of the Words page with search. You learn them 10 at a time by typing the past simple and the past participle (or test yourself first and skip the ones you know); they come back with spaced repetition and every correct answer earns XP.
 - **Flashcards** with spaced repetition and a list of every word, where you can mark what you already know or check a whole level quickly.
 - **Word games**, a "My mistakes" page, achievements and a daily goal.
 - **Cambridge:** 2 full mock exams each for B1 Preliminary (PET) and B2 First (FCE), with an "am I ready?" indicator.
@@ -78,6 +79,7 @@ public/                   the app that runs in the browser
 data/
   a1/ a2/ b1/ b2/         unit01–10.json, bank01–10.json (word banks), test01–10.json (new test questions),
                           placement.json, speaking.json
+  verbs.json              the irregular verbs
   cambridge/pet|fce/      the mock exams
 tools/                    content format (SCHEMA*.md) and validators
 user/progress.json        your progress

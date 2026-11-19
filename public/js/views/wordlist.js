@@ -31,8 +31,8 @@ export function wordRow(w, draw) {
 
 const PAGE = 300;
 
-export function wordsView(main) {
-  let fStatus = 'all', fLevel = 'all', q = '', limit = PAGE;
+export function wordsView(main, tab) {
+  let fStatus = ['learned', 'learning', 'new'].includes(tab) ? tab : 'all', fLevel = 'all', q = '', limit = PAGE;
   const all = Object.values(S.wordIndex);
   const progress = h('div.card');
   const banner = h('div');
@@ -61,7 +61,8 @@ export function wordsView(main) {
         h('button.btn', { onclick: () => { flags.keepSkippedWords = true; save(); draw(); } }, L('Nu, vreau să le parcurg', 'No, I want to go through them')))) : null);
 
     tabs.replaceChildren(...[['all', L('Toate', 'All'), wc.total], ['learned', L('✅ Învățate', '✅ Learned'), wc.learned], ['learning', L('🌱 În curs', '🌱 Learning'), wc.learning], ['new', L('🆕 De învățat', '🆕 To learn'), wc.new]]
-      .map(([k, label, n]) => h('button.tab' + (k === fStatus ? '.on' : ''), { onclick: () => { fStatus = k; limit = PAGE; draw(); } }, `${label} (${n})`)));
+      .map(([k, label, n]) => h('button.tab' + (k === fStatus ? '.on' : ''), { onclick: () => { fStatus = k; limit = PAGE; draw(); } }, `${label} (${n})`)),
+      S.verbs.length ? h('a.tab.tab-verbs', { href: '#/words/verbs' }, L(`🔁 Verbe neregulate (${S.verbs.length})`, `🔁 Irregular verbs (${S.verbs.length})`)) : null);
 
     const rows = all.filter((w) => (fStatus === 'all' || wordStatus(w.en) === fStatus) && (fLevel === 'all' || w.levelId === fLevel)
       && (!q || w.en.toLowerCase().includes(q) || w.ro.toLowerCase().includes(q)));

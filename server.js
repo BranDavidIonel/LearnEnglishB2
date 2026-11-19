@@ -18,7 +18,7 @@ const PROGRESS = path.join(USER_DIR, 'progress.json');
 const LEVELS = ['a1', 'a2', 'b1', 'b2'];
 // Raise this whenever the server starts sending something new that the pages need.
 // The page compares it with the version it expects and asks for a restart when the server is older.
-const API = 4;
+const API = 5;
 const URL_ = `http://localhost:${PORT}`;
 
 const MIME = {
@@ -56,6 +56,12 @@ function loadContent() {
   });
 }
 
+/** Irregular verbs (data/verbs.json), most used first. */
+function loadVerbs() {
+  const v = readJson(path.join(DATA, 'verbs.json'));
+  return v && Array.isArray(v.verbs) ? v.verbs : [];
+}
+
 function loadCambridge() {
   const out = [];
   for (const id of ['pet', 'fce']) {
@@ -79,7 +85,7 @@ const server = http.createServer((req, res) => {
   const p = decodeURIComponent(url.pathname);
 
   if (p === '/api/ping') return send(res, 200, JSON.stringify({ app: 'english-levels', api: API }));
-  if (p === '/api/content') return send(res, 200, JSON.stringify({ api: API, levels: loadContent(), cambridge: loadCambridge() }));
+  if (p === '/api/content') return send(res, 200, JSON.stringify({ api: API, levels: loadContent(), cambridge: loadCambridge(), verbs: loadVerbs() }));
 
   if (p === '/api/progress' && req.method === 'GET') {
     return send(res, 200, JSON.stringify(readJson(PROGRESS) || {}));

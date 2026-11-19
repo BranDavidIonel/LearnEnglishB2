@@ -21,13 +21,13 @@ export const STEPS = ['vocab', 'grammar', 'dialogue', 'practice', 'reading'];
 const INTERVALS = [0, 1, 3, 7, 14, 30, 60]; // days until next review, by box
 export const LEARNED_BOX = 3;
 
-export const S = { levels: [], unitById: {}, wordIndex: {}, p: null, serverOld: false };
+export const S = { levels: [], unitById: {}, wordIndex: {}, verbs: [], verbById: {}, p: null, serverOld: false };
 /** The server version these pages need (see API in server.js). */
-const API_NEEDED = 4;
+const API_NEEDED = 5;
 
 const fresh = () => ({
   v: 1, xp: 0, goal: 50, streak: { count: 0, last: null }, days: {},
-  placement: null, units: {}, exams: {}, words: {}, mistakes: [], games: {},
+  placement: null, units: {}, exams: {}, words: {}, verbs: {}, mistakes: [], games: {},
   settings: { theme: 'dark', rate: 0.9, voice: null, sound: true },
 });
 
@@ -39,6 +39,9 @@ export async function load() {
   S.levels = c.levels;
   S.serverOld = (c.api || 1) < API_NEEDED; // the server was started before the last update
   S.cambridge = c.cambridge || [];
+  S.verbs = c.verbs || [];
+  S.verbById = {};
+  S.verbs.forEach((v, i) => { v.rank = i + 1; v.levelId = String(v.level || 'a1').toLowerCase(); S.verbById[v.v1] = v; });
   S.unitById = {}; S.wordIndex = {};
   S.levels.forEach((lv, li) => {
     lv.index = li; Object.assign(lv, LEVEL_INFO[lv.id]);
@@ -54,6 +57,7 @@ export async function load() {
   if (!saved) { try { saved = JSON.parse(localStorage.getItem('el-progress') || 'null'); } catch { saved = null; } }
   S.p = Object.assign(fresh(), saved || {});
   S.p.settings = Object.assign(fresh().settings, S.p.settings || {});
+  S.p.verbs = S.p.verbs || {};
   applySettings();
   if (saved) snapshot(); // keeps today's point on the chart current (not written until the next save)
 }
@@ -71,7 +75,7 @@ export function snapshot() {
   if (!S.levels.length || !S.p) return;
   const hist = S.p.history || (S.p.history = {});
   const pc = (id) => (level(id) ? Math.round(progressTo(id) * 1000) / 10 : 0);
-  hist[today()] = { xp: S.p.xp, w: wordCounts().learned, b1: pc('b1'), b2: pc('b2') };
+  hist[today()] = { xp: S.p.xp, w: wordCounts().learned, v: verbCounts().learned, b1: pc('b1'), b2: pc('b2') };
 }
 
 let saveTimer;
@@ -305,6 +309,43 @@ export function knownWords(min = 8) {
   return ws;
 }
 
+// ---- irregular verbs (spaced repetition, like the words) ----
+/** The accepted alternatives of a form: "learnt / learned" → ["learnt", "learned"]. */
+export const verbAlts = (form) => String(form).split('/').map((x) => x.trim()).filter(Boolean);
+/** Everything we accept when a form is typed: any alternative, or all of them together ("was / were"). */
+export function verbAnswers(form) {
+  const alts = verbAlts(form);
+  return [...alts, alts.join(' '), alts.join('/'), alts.join(' / ')];
+}
+export function verbStatus(v1) {
+  const s = S.p.verbs[v1];
+  if (!s) return 'new';
+  return s.box >= LEARNED_BOX ? 'learned' : 'learning';
+}
+export function verbCounts() {
+  const c = { learned: 0, learning: 0, new: 0, total: S.verbs.length };
+  for (const v of S.verbs) c[verbStatus(v.v1)]++;
+  return c;
+}
+export function dueVerbs() {
+  const d = dayNum();
+  return S.verbs.filter((v) => S.p.verbs[v.v1] && S.p.verbs[v.v1].due <= d).sort((a, b) => S.p.verbs[a.v1].due - S.p.verbs[b.v1].due);
+}
+/** grade: 0 = wrong, 2 = both forms right */
+export function gradeVerb(v1, grade) {
+  const s = S.p.verbs[v1] || (S.p.verbs[v1] = { box: 0, due: dayNum(), ok: 0, bad: 0 });
+  if (grade === 0) { s.box = 0; s.bad++; s.due = dayNum(); }
+  else { s.box = Math.min(s.box + 1, INTERVALS.length - 1); s.due = dayNum() + INTERVALS[s.box]; s.ok++; }
+  save();
+}
+/** Typed both forms right before studying the verb: it counts as learned and comes back in a week as a check. */
+export function verbKnown(v1) {
+  S.p.verbs[v1] = { box: LEARNED_BOX, due: dayNum() + INTERVALS[LEARNED_BOX], ok: 1, bad: 0, known: true };
+}
+/** Puts a verb into the review queue from the start (or again). */
+export function learnVerb(v1) { S.p.verbs[v1] = { box: 0, due: dayNum(), ok: 0, bad: 0 }; }
+export function forgetVerb(v1) { delete S.p.verbs[v1]; }
+
 // ---- mistakes ----
 export function addMistake(key) { if (key && !S.p.mistakes.includes(key)) { S.p.mistakes.push(key); if (S.p.mistakes.length > 200) S.p.mistakes.shift(); } }
 export function clearMistake(key) { const i = S.p.mistakes.indexOf(key); if (i >= 0) S.p.mistakes.splice(i, 1); }
@@ -406,6 +447,9 @@ export function badges() {
     { icon: '📙', name: L('1000 de cuvinte', '1000 words'), desc: L('Vocabular de nivel A2', 'An A2-sized vocabulary'), ok: wc.learned >= 1000 },
     { icon: '📕', name: L('2000 de cuvinte', '2000 words'), desc: L('Vocabular de nivel B1', 'A B1-sized vocabulary'), ok: wc.learned >= 2000 },
     { icon: '📚', name: L('3000 de cuvinte', '3000 words'), desc: L('Vocabular de nivel B2', 'A B2-sized vocabulary'), ok: wc.learned >= 3000 },
+    { icon: '🔁', name: L('25 de verbe neregulate', '25 irregular verbs'), desc: L('Învață formele a 25 de verbe neregulate', 'Learn the forms of 25 irregular verbs'), ok: verbCounts().learned >= 25 },
+    { icon: '🏋️', name: L('100 de verbe neregulate', '100 irregular verbs'), desc: L('Învață formele a 100 de verbe neregulate', 'Learn the forms of 100 irregular verbs'), ok: verbCounts().learned >= 100 },
+    { icon: '👑', name: L('Toate verbele neregulate', 'Every irregular verb'), desc: L('Învață formele tuturor verbelor neregulate din listă', 'Learn the forms of every irregular verb in the list'), ok: S.verbs.length > 0 && verbCounts().learned >= S.verbs.length },
     { icon: '💎', name: '1000 XP', desc: L('Strânge 1000 de puncte', 'Collect 1000 XP'), ok: p.xp >= 1000 },
     { icon: '🥉', name: L('Nivel A1', 'Level A1'), desc: L('Termină nivelul A1', 'Finish level A1'), ok: lvPassed('a1') },
     { icon: '🥈', name: L('Nivel A2', 'Level A2'), desc: L('Termină nivelul A2', 'Finish level A2'), ok: lvPassed('a2') },

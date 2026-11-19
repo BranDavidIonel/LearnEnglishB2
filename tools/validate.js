@@ -256,5 +256,30 @@ for (const lvl of levels) {
     } catch (e) { err(pf, `invalid JSON: ${e.message}`); }
   }
 }
+// ---- irregular verbs (data/verbs.json) ----
+(function checkVerbs() {
+  const f = 'verbs.json';
+  const p = path.join(ROOT, f);
+  console.log('\n== IRREGULAR VERBS ==');
+  if (!fs.existsSync(p)) return warn(f, 'file missing (no irregular verbs section)');
+  let d;
+  try { d = JSON.parse(fs.readFileSync(p, 'utf8')); } catch (e) { return err(f, `invalid JSON: ${e.message}`); }
+  if (!Array.isArray(d.verbs) || !d.verbs.length) return err(f, 'needs a verbs[] array');
+  const alts = (s) => String(s).split('/').map((x) => x.trim()).filter(Boolean);
+  const has = (text, form) => alts(form).some((a) => new RegExp(`\\b${a.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i').test(text || ''));
+  const seen = new Set();
+  d.verbs.forEach((v, i) => {
+    const w = `verbs[${i}] (${v && v.v1})`;
+    for (const k of ['v1', 'v2', 'v3', 'ro', 'ipa', 'ex2', 'ex2Ro', 'ex3', 'ex3Ro']) if (!str(v[k])) err(f, `${w} missing ${k}`);
+    if (!['A1', 'A2', 'B1', 'B2'].includes(v.level)) err(f, `${w} bad level "${v.level}"`);
+    if (seen.has(v.v1)) err(f, `${w} repeated`); seen.add(v.v1);
+    if (str(v.ex2) && !has(v.ex2, v.v2)) err(f, `${w} ex2 must use the past simple "${v.v2}"`);
+    if (str(v.ex3) && !has(v.ex3, v.v3)) err(f, `${w} ex3 must use the past participle "${v.v3}"`);
+    if (str(v.ipa) && !/^\/.+\/$/.test(v.ipa.trim())) err(f, `${w} ipa must look like /…/ – /…/ – /…/`);
+    if (/[şţŞŢ]/.test(`${v.ro} ${v.ex2Ro} ${v.ex3Ro}`)) err(f, `${w} uses ş/ţ with cedilla — use ș/ț`);
+  });
+  console.log(`  ${d.verbs.length} verbs`);
+})();
+
 console.log(`\n${errors} error(s), ${warnings} warning(s)`);
 process.exit(errors ? 1 : 0);
