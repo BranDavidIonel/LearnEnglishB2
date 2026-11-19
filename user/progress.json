@@ -1,16 +1,17 @@
 {
  "v": 1,
- "xp": 420,
+ "xp": 581,
  "goal": 50,
  "streak": {
-  "count": 4,
-  "last": "2026-11-18"
+  "count": 5,
+  "last": "2026-11-19"
  },
  "days": {
   "2026-11-15": 104,
   "2026-11-16": 116,
   "2026-11-17": 170,
-  "2026-11-18": 30
+  "2026-11-18": 96,
+  "2026-11-19": 95
  },
  "placement": {
   "start": 2,
@@ -50,8 +51,65 @@
   },
   "b1-u03": {
    "steps": {
-    "vocab": true
+    "vocab": true,
+    "grammar": true,
+    "dialogue": true,
+    "practice": true,
+    "reading": true
    },
+   "best": 0.9166666666666666,
+   "passed": true,
+   "review": false,
+   "tries": 3
+  },
+  "b1-u04": {
+   "steps": {
+    "vocab": true,
+    "grammar": true,
+    "dialogue": true
+   },
+   "best": 0,
+   "passed": false,
+   "review": false,
+   "tries": 0
+  },
+  "b1-u05": {
+   "steps": {},
+   "best": 0,
+   "passed": false,
+   "review": false,
+   "tries": 0
+  },
+  "b1-u06": {
+   "steps": {},
+   "best": 0,
+   "passed": false,
+   "review": false,
+   "tries": 0
+  },
+  "b1-u07": {
+   "steps": {},
+   "best": 0,
+   "passed": false,
+   "review": false,
+   "tries": 0
+  },
+  "b1-u08": {
+   "steps": {},
+   "best": 0,
+   "passed": false,
+   "review": false,
+   "tries": 0
+  },
+  "b1-u09": {
+   "steps": {},
+   "best": 0,
+   "passed": false,
+   "review": false,
+   "tries": 0
+  },
+  "b1-u10": {
+   "steps": {},
    "best": 0,
    "passed": false,
    "review": false,
@@ -188,10 +246,11 @@
    "bad": 0
   },
   "experience": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
-   "bad": 0
+   "box": 6,
+   "due": 20835,
+   "ok": 0,
+   "bad": 0,
+   "known": true
   },
   "skill": {
    "box": 6,
@@ -207,10 +266,11 @@
    "bad": 0
   },
   "employer": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
-   "bad": 0
+   "box": 6,
+   "due": 20835,
+   "ok": 0,
+   "bad": 0,
+   "known": true
   },
   "position": {
    "box": 6,
@@ -226,10 +286,11 @@
    "bad": 0
   },
   "get promoted": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
-   "bad": 0
+   "box": 6,
+   "due": 20835,
+   "ok": 0,
+   "bad": 0,
+   "known": true
   },
   "achievement": {
    "box": 1,
@@ -414,28 +475,32 @@
    "known": true
   },
   "refactor": {
-   "box": 0,
-   "due": 20775,
+   "box": 6,
+   "due": 20835,
    "ok": 0,
-   "bad": 0
+   "bad": 0,
+   "known": true
   },
   "migrate": {
-   "box": 0,
-   "due": 20775,
+   "box": 6,
+   "due": 20835,
    "ok": 0,
-   "bad": 0
+   "bad": 0,
+   "known": true
   },
   "legacy code": {
-   "box": 0,
-   "due": 20775,
+   "box": 6,
+   "due": 20835,
    "ok": 0,
-   "bad": 0
+   "bad": 0,
+   "known": true
   },
   "progress": {
-   "box": 0,
-   "due": 20775,
+   "box": 6,
+   "due": 20835,
    "ok": 0,
-   "bad": 0
+   "bad": 0,
+   "known": true
   },
   "exhausted": {
    "box": 0,
@@ -510,8 +575,250 @@
    "bad": 0
   },
   "burnout": {
+   "box": 6,
+   "due": 20835,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "please": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "sorry": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "excuse me": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "yes": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "no": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "welcome": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "meet": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "nice": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "job": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "work": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "company": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "business": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "programmer": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "manager": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "nurse": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "driver": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "police officer": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "shop assistant": {
+   "box": 1,
+   "due": 20776,
+   "ok": 1,
+   "bad": 0
+  },
+  "Mr": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "Mrs": {
+   "box": 3,
+   "due": 20782,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "outage": {
    "box": 0,
-   "due": 20775,
+   "due": 20776,
+   "ok": 0,
+   "bad": 0
+  },
+  "crash": {
+   "box": 0,
+   "due": 20776,
+   "ok": 0,
+   "bad": 0
+  },
+  "roll back": {
+   "box": 0,
+   "due": 20776,
+   "ok": 0,
+   "bad": 0
+  },
+  "backup": {
+   "box": 0,
+   "due": 20776,
+   "ok": 0,
+   "bad": 0
+  },
+  "on call": {
+   "box": 0,
+   "due": 20776,
+   "ok": 0,
+   "bad": 0
+  },
+  "hotfix": {
+   "box": 0,
+   "due": 20776,
+   "ok": 0,
+   "bad": 0
+  },
+  "realise": {
+   "box": 0,
+   "due": 20776,
+   "ok": 0,
+   "bad": 0
+  },
+  "suddenly": {
+   "box": 0,
+   "due": 20776,
+   "ok": 0,
+   "bad": 0
+  },
+  "eventually": {
+   "box": 0,
+   "due": 20776,
+   "ok": 0,
+   "bad": 0
+  },
+  "luckily": {
+   "box": 0,
+   "due": 20776,
+   "ok": 0,
+   "bad": 0
+  },
+  "miss a flight": {
+   "box": 0,
+   "due": 20776,
+   "ok": 0,
+   "bad": 0
+  },
+  "boarding pass": {
+   "box": 0,
+   "due": 20776,
+   "ok": 0,
+   "bad": 0
+  },
+  "delayed": {
+   "box": 0,
+   "due": 20776,
+   "ok": 0,
+   "bad": 0
+  },
+  "run out of": {
+   "box": 0,
+   "due": 20776,
+   "ok": 0,
+   "bad": 0
+  },
+  "turn out": {
+   "box": 0,
+   "due": 20776,
+   "ok": 0,
+   "bad": 0
+  },
+  "stranded": {
+   "box": 0,
+   "due": 20776,
+   "ok": 0,
+   "bad": 0
+  },
+  "connecting flight": {
+   "box": 0,
+   "due": 20776,
    "ok": 0,
    "bad": 0
   }
@@ -519,7 +826,16 @@
  "mistakes": [
   "b1-u02:16",
   "b1-u02:17",
-  "b1-u02:14"
+  "b1-u02:14",
+  "b1-u03:3",
+  "b1-u03:9",
+  "b1-u03:11",
+  "b1-u03:12",
+  "b1-u03:14",
+  "b1-u03:17",
+  "b1-u03:19",
+  "b1-u03:t11",
+  "b1-u03:t6"
  ],
  "games": {
   "memory": 36,
@@ -551,10 +867,16 @@
    "b2": 54.5
   },
   "2026-11-18": {
-   "xp": 420,
-   "w": 29,
-   "b1": 73.1,
-   "b2": 54.9
+   "xp": 486,
+   "w": 56,
+   "b1": 74.6,
+   "b2": 55.9
+  },
+  "2026-11-19": {
+   "xp": 581,
+   "w": 56,
+   "b1": 77.1,
+   "b2": 57.8
   }
  },
  "cambridge": {
@@ -564,9 +886,10 @@
   }
  },
  "speak": {
-  "said": 15,
+  "said": 20,
   "scen": {
-   "role-b1-u01": 0.85
+   "role-b1-u01": 0.85,
+   "role-b1-u04": 0.8200000000000001
   },
   "best": {
    "sprint": 7
