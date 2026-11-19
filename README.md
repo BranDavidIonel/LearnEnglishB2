@@ -19,7 +19,7 @@ It is organised in levels: each unit ends with a test and each level with an exa
 
 ## What's inside
 
-- **A1 → B2 course:** 40 units, 10 per level. Each has new words, grammar explained in Romanian, a dialogue, exercises, a reading text and a final test.
+- **A1 → B2 course:** 40 units, 10 per level. Each has new words, grammar explained in Romanian, a dialogue, exercises, a reading text and a final test. Half of each test is new questions — the same grammar and words in sentences you haven't seen in the unit — so it checks understanding, not memory.
 - **Content:** about 2,950 words (a CEFR-sized vocabulary: ~600 by the end of A1, ~1,200 by A2, ~2,000 by B1, ~3,000 by B2), 960 exercises of 6 types (multiple choice, fill the gap, word order, translation, dictation, matching pairs) and 40 recommended videos (one per unit, each with a presenter on camera).
 - **Placement test** at the start, so you can skip what you already know.
 - **Speaking:**
@@ -76,7 +76,8 @@ public/                   the app that runs in the browser
   js/views/               the pages: lessons, speaking, words, Cambridge, settings…
   js/i18n.js              interface translations: L('română', 'English')
 data/
-  a1/ a2/ b1/ b2/         unit01–10.json, bank01–10.json (word banks), placement.json, speaking.json
+  a1/ a2/ b1/ b2/         unit01–10.json, bank01–10.json (word banks), test01–10.json (new test questions),
+                          placement.json, speaking.json
   cambridge/pet|fce/      the mock exams
 tools/                    content format (SCHEMA*.md) and validators
 user/progress.json        your progress

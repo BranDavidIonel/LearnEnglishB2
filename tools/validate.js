@@ -167,6 +167,64 @@ function checkBank(lvl, n) {
   });
 }
 
+// ---- new unit-test questions (testNN.json next to unitNN.json) ----
+// Half of every unit test comes from here: the same grammar and words as the unit, in sentences the unit never shows.
+const TEST_COUNT = 12;
+const TEST_MIN = { mc: 4, fill: 2, order: 2, translate: 1, listen: 1 };
+const flat = (s) => String(s || '').toLowerCase().replace(/\([^)]*\)/g, ' ').replace(/[^a-z0-9' ]+/g, ' ').replace(/\s+/g, ' ').trim();
+/** The full English sentence an exercise is about (gap filled in), for spotting repeats. */
+function sentencesOf(ex) {
+  const fillGap = (q, a) => (q || '').replace('___', a || '');
+  switch (ex && ex.type) {
+    case 'mc': return [fillGap(ex.q, (ex.options || [])[ex.answer])];
+    case 'fill': return [fillGap(ex.q, (ex.answers || [])[0])];
+    case 'order': return [(ex.words || []).join(' ')];
+    case 'translate': return [(ex.answers || [])[0]];
+    case 'listen': return [ex.audio];
+    default: return [];
+  }
+}
+function unitSentences(u) {
+  const out = [];
+  (u.exercises || []).forEach((e) => out.push(...sentencesOf(e)));
+  (u.vocab || []).forEach((v) => out.push(v.ex));
+  ((u.grammar && u.grammar.sections) || []).forEach((s) => (s.examples || []).forEach((e) => out.push(e.en)));
+  ((u.dialogue && u.dialogue.lines) || []).forEach((l) => out.push(l.en));
+  if (u.reading) {
+    out.push(...String(u.reading.text || '').split(/(?<=[.!?])\s+/));
+    (u.reading.questions || []).forEach((q) => out.push(q.q));
+  }
+  return new Set(out.map(flat).filter((s) => s.split(' ').length >= 3));
+}
+
+function checkTest(lvl, n) {
+  const f = `${lvl}/test${pad(n)}.json`;
+  const p = path.join(ROOT, lvl, `test${pad(n)}.json`);
+  if (!fs.existsSync(p)) return warn(f, 'file missing (the unit test uses only the unit\'s exercises)');
+  let t;
+  try { t = JSON.parse(fs.readFileSync(p, 'utf8')); } catch (e) { return err(f, `invalid JSON: ${e.message}`); }
+  const id = `${lvl}-u${pad(n)}`;
+  if (t.unit !== id) err(f, `unit must be "${id}"`);
+  if (!Array.isArray(t.questions)) return err(f, 'needs a questions[] array');
+  if (t.questions.length !== TEST_COUNT) err(f, `needs exactly ${TEST_COUNT} questions (has ${t.questions.length})`);
+  const cnt = {};
+  t.questions.forEach((q, i) => {
+    if (q && q.type === 'match') return err(f, `questions[${i}]: "match" is not used in tests`);
+    checkExercise(f, q, `questions[${i}]`);
+    cnt[q && q.type] = (cnt[q && q.type] || 0) + 1;
+  });
+  for (const k in TEST_MIN) if ((cnt[k] || 0) < TEST_MIN[k]) err(f, `needs at least ${TEST_MIN[k]} "${k}" questions (has ${cnt[k] || 0})`);
+  const u = readOr(path.join(ROOT, lvl, `unit${pad(n)}.json`));
+  const known = u ? unitSentences(u) : new Set();
+  const mine = new Set();
+  t.questions.forEach((q, i) => sentencesOf(q).map(flat).forEach((s) => {
+    if (!s) return;
+    if (known.has(s)) err(f, `questions[${i}]: "${s}" already appears in the unit — tests need new sentences`);
+    if (mine.has(s)) err(f, `questions[${i}]: "${s}" is repeated inside the test`);
+    mine.add(s);
+  }));
+}
+
 for (const lvl of levels) {
   console.log(`\n== ${lvl.toUpperCase()} ==`);
   const dir = path.join(ROOT, lvl);
@@ -181,6 +239,7 @@ for (const lvl of levels) {
     try { u = JSON.parse(fs.readFileSync(p, 'utf8')); } catch (e) { err(f, `invalid JSON: ${e.message}`); continue; }
     try { checkUnit(f, u, lvl, n, seen); } catch (e) { err(f, `crashed while checking: ${e.message}`); }
     try { checkBank(lvl, n); } catch (e) { err(`${lvl}/bank${pad(n)}.json`, `crashed while checking: ${e.message}`); }
+    try { checkTest(lvl, n); } catch (e) { err(`${lvl}/test${pad(n)}.json`, `crashed while checking: ${e.message}`); }
   }
   const pf = `${lvl}/placement.json`;
   const pp = path.join(dir, 'placement.json');

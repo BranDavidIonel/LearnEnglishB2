@@ -23,7 +23,7 @@ export const LEARNED_BOX = 3;
 
 export const S = { levels: [], unitById: {}, wordIndex: {}, p: null, serverOld: false };
 /** The server version these pages need (see API in server.js). */
-const API_NEEDED = 3;
+const API_NEEDED = 4;
 
 const fresh = () => ({
   v: 1, xp: 0, goal: 50, streak: { count: 0, last: null }, days: {},
@@ -45,6 +45,7 @@ export async function load() {
     lv.units.forEach((u, ui) => {
       u.levelId = lv.id; u.index = ui; S.unitById[u.id] = u;
       u.bank = u.bank || [];
+      u.testItems = u.testItems || [];
       u.vocab.forEach((w) => { if (!S.wordIndex[w.en]) S.wordIndex[w.en] = { ...w, unit: u.id, levelId: lv.id }; });
       u.bank.forEach((w) => { if (!S.wordIndex[w.en]) S.wordIndex[w.en] = { ...w, unit: u.id, levelId: lv.id, bank: true }; });
     });
@@ -312,7 +313,9 @@ export function mistakeItems() {
     const [uid, idx] = key.split(':');
     const u = S.unitById[uid];
     if (!u) return null;
-    const ex = idx[0] === 'r' ? u.reading.questions[Number(idx.slice(1))] : u.exercises[Number(idx)];
+    const ex = idx[0] === 'r' ? u.reading.questions[Number(idx.slice(1))]
+      : idx[0] === 't' ? u.testItems[Number(idx.slice(1))] // a new question from the unit test
+        : u.exercises[Number(idx)];
     if (!ex || idx[0] === 'r') return null; // reading questions need their text; skip them here
     return { ex, unit: uid, key };
   }).filter(Boolean);

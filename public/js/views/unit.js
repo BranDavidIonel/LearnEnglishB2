@@ -18,6 +18,8 @@ const STEP_INFO = {
   test: ['🎯', L('Testul unității', 'Unit test'), L(`Minimum ${Math.round(PASS * 100)}% ca să treci mai departe`, `At least ${Math.round(PASS * 100)}% to move on`)],
 };
 const ORDER = [...STEPS, 'test'];
+const TEST_SIZE = 12;
+const TEST_NEW = 6; // new questions in each unit test (the rest come from the unit's exercises)
 const nextStep = (s) => ORDER[ORDER.indexOf(s) + 1];
 
 export function unitView(main, id, step) {
@@ -277,11 +279,19 @@ function test(box, u, lv) {
   const st = unitState(u.id);
   const missing = STEPS.filter((s) => !st.steps[s]);
   const start = () => {
-    const pool = u.exercises.map((ex, i) => ({ ex, unit: u.id, key: `${u.id}:${i}` })).filter((x) => x.ex.type !== 'match');
-    runSession(box, sample(pool, Math.min(12, pool.length)), {
+    // half the test: questions from the unit's exercises; the other half: new sentences on the same grammar and words
+    const seen = u.exercises.map((ex, i) => ({ ex, unit: u.id, key: `${u.id}:${i}` })).filter((x) => x.ex.type !== 'match');
+    const fresh = u.testItems.map((ex, i) => ({ ex, unit: u.id, key: `${u.id}:t${i}`, fresh: true }));
+    const nNew = Math.min(TEST_NEW, fresh.length);
+    const items = shuffle([...sample(fresh, nNew), ...sample(seen, Math.min(TEST_SIZE - nNew, seen.length))]);
+    const isNew = new Set(items.filter((x) => x.fresh).map((x) => x.key));
+    runSession(box, items, {
       mode: 'test', title: L(`🎯 Testul unității ${u.order}`, `🎯 Unit ${u.order} test`), onExit: () => go(`#/unit/${u.id}`),
       onFinish: (res) => {
         const score = res.filter((r) => r.correct).length / res.length;
+        const part = (pick) => { const r = res.filter(pick); return `${r.filter((x) => x.correct).length}/${r.length}`; };
+        const split = isNew.size ? L(`Întrebări noi: **${part((r) => isNew.has(r.key))}** · din exercițiile unității: **${part((r) => !isNew.has(r.key))}**`,
+          `New questions: **${part((r) => isNew.has(r.key))}** · from the unit's exercises: **${part((r) => !isNew.has(r.key))}**`) : '';
         res.forEach((r) => { if (r.correct) clearMistake(r.key); else addMistake(r.key); });
         const passed = recordUnitTest(u, score);
         const nextU = lv.units[u.index + 1];
@@ -289,7 +299,7 @@ function test(box, u, lv) {
         if (passed) { confetti(); sfx('win'); }
         box.replaceChildren(resultCard({ score, passed, passMark: PASS,
           title: passed ? L('Unitate trecută! ⭐', 'Unit passed! ⭐') : L('Încă nu — mai exersează puțin', 'Not yet — practise a bit more'),
-          lines: passed ? [L('Ai deblocat pasul următor.', "You've unlocked the next step.")] : [L('Nu-i nimic, așa se învață. Întoarce-te la **gramatică** și **exerciții**, apoi încearcă din nou. Întrebările greșite sunt salvate la „Greșelile mele”.', "No worries, that's how you learn. Go back to the **grammar** and **exercises**, then try again. The questions you got wrong are saved in “My mistakes”.")],
+          lines: [split, passed ? L('Ai deblocat pasul următor.', "You've unlocked the next step.") : L('Nu-i nimic, așa se învață. Întoarce-te la **gramatică** și **exerciții**, apoi încearcă din nou. Întrebările greșite sunt salvate la „Greșelile mele”.', "No worries, that's how you learn. Go back to the **grammar** and **exercises**, then try again. The questions you got wrong are saved in “My mistakes”.")].filter(Boolean),
           actions: passed
             ? [stillReview.length ? btn(L(`Următoarea de recapitulat: unitatea ${stillReview[0].order} →`, `Next to review: Unit ${stillReview[0].order} →`), `#/unit/${stillReview[0].id}`, 'primary big')
               : nextU ? btn(L(`Unitatea ${nextU.order}: ${nextU.title} →`, `Unit ${nextU.order}: ${nextU.title} →`), `#/unit/${nextU.id}`, 'primary big') : btn(L(`🎓 Examenul ${lv.name} →`, `🎓 ${lv.name} level exam →`), `#/exam/${lv.id}`, 'primary big'),
@@ -300,7 +310,10 @@ function test(box, u, lv) {
     });
   };
   box.append(empty('🎯', L(`Testul unității ${u.order}`, `Unit ${u.order} test`),
-    L(`12 întrebări din tot ce ai învățat în această unitate. Ai nevoie de minimum ${pct(PASS)}% ca să treci. La test nu primești explicații după fiecare întrebare.`, `12 questions on everything you learned in this unit. You need at least ${pct(PASS)}% to pass. There are no explanations after each question in the test.`),
+    u.testItems.length
+      ? L(`${TEST_SIZE} întrebări: jumătate din exercițiile unității, jumătate noi — aceeași gramatică și aceleași cuvinte, în propoziții pe care nu le-ai mai văzut. Așa se vede dacă ai înțeles, nu doar reținut. Ai nevoie de minimum ${pct(PASS)}% ca să treci. La test nu primești explicații după fiecare întrebare.`,
+        `${TEST_SIZE} questions: half from the unit's exercises, half new — the same grammar and words in sentences you haven't seen before. That shows whether you understood, not just remembered. You need at least ${pct(PASS)}% to pass. There are no explanations after each question in the test.`)
+      : L(`${TEST_SIZE} întrebări din tot ce ai învățat în această unitate. Ai nevoie de minimum ${pct(PASS)}% ca să treci. La test nu primești explicații după fiecare întrebare.`, `${TEST_SIZE} questions on everything you learned in this unit. You need at least ${pct(PASS)}% to pass. There are no explanations after each question in the test.`),
     [h('button.btn.primary.big', { onclick: () => { box.replaceChildren(); start(); } }, L('▶ Începe testul', '▶ Start the test'))]),
   missing.length ? h('div.alert.warn', L(`Sfat: nu ai terminat încă pașii: ${missing.map((s) => STEP_INFO[s][1]).join(', ')}. Poți da testul oricum, dacă știi deja materia.`, `Tip: you haven't finished these steps yet: ${missing.map((s) => STEP_INFO[s][1]).join(', ')}. You can take the test anyway if you already know the material.`)) : null,
   st.best ? h('p.muted.center', L(`Cel mai bun rezultat până acum: ${pct(st.best)}% (${st.tries} ${st.tries === 1 ? 'încercare' : 'încercări'})`, `Best result so far: ${pct(st.best)}% (${st.tries} ${st.tries === 1 ? 'attempt' : 'attempts'})`)) : null);

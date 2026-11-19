@@ -18,7 +18,7 @@ const PROGRESS = path.join(USER_DIR, 'progress.json');
 const LEVELS = ['a1', 'a2', 'b1', 'b2'];
 // Raise this whenever the server starts sending something new that the pages need.
 // The page compares it with the version it expects and asks for a restart when the server is older.
-const API = 3;
+const API = 4;
 const URL_ = `http://localhost:${PORT}`;
 
 const MIME = {
@@ -42,6 +42,9 @@ function loadContent() {
         // extra words of the unit ("word bank") live next to it: unit03.json → bank03.json
         const bank = readJson(path.join(dir, f.replace(/^unit/, 'bank')));
         u.bank = bank && Array.isArray(bank.words) ? bank.words : [];
+        // new questions for the unit test (sentences the learner has not seen in the unit): unit03.json → test03.json
+        const test = readJson(path.join(dir, f.replace(/^unit/, 'test')));
+        u.testItems = test && Array.isArray(test.questions) ? test.questions : [];
         units.push(u);
       }
     }

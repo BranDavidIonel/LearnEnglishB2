@@ -155,6 +155,27 @@ Roughly half the words follow the unit's topic; the other half are general high-
 level, placed in the unit where they fit best. `node tools/validate.js` checks the fields, the count and
 that no word repeats anywhere in the course.
 
+## New unit-test questions (`test01.json` … `test10.json`)
+
+A unit test has 12 questions: **6 come from the unit's `exercises`** and **6 are new**, drawn from this file.
+The new ones check that the learner understood the unit, not that they remember the exercises: the same grammar
+and the same core words, in sentences, names and situations that appear nowhere in the unit.
+
+```jsonc
+{
+  "unit": "b1-u03",
+  "questions": [               // exactly 12, same exercise shapes as above ("match" is not allowed)
+  ]                            // at least 4 mc, 2 fill, 2 order, 1 translate, 1 listen
+}
+```
+
+- About two thirds practise the unit's grammar, one third its core `vocab` (not the word bank).
+- Use only grammar and words from this unit and earlier ones; same difficulty as the unit's exercises — no trick questions.
+- No sentence may repeat one from the unit (exercises, vocab examples, grammar examples, dialogue, reading):
+  `node tools/validate.js` reports any exact repeat.
+- Every `fill`/`translate`/`listen` lists all accepted answers (contractions and full forms); every `mc` has exactly
+  one defensible answer.
+
 ## placement.json
 
 ```jsonc
