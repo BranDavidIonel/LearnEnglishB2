@@ -470,3 +470,10 @@ a.mist-row:hover, a.gram-row:hover { outline: 1px solid var(--primary2); }
 .verb-help summary { cursor: pointer; font-weight: 700; }
 .verb-help p { margin: 8px 0 0; }
 @media (max-width: 560px) { .verb-inputs { grid-template-columns: 1fr; } .verb-forms { font-size: 1.5rem; } }
+.verb-usage { display: grid; gap: 4px; margin: 10px 0 6px; text-align: left; background: var(--panel2); border-radius: 12px; padding: 8px 12px; }
+.verb-usage-row { display: grid; grid-template-columns: 30px minmax(120px, 1fr) 2fr; gap: 8px; align-items: baseline; }
+.verb-help-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.verb-help-grid > div { display: flex; flex-direction: column; gap: 2px; }
+.icon-btn.help-icon { display: inline-grid; place-items: center; vertical-align: middle; width: 28px; height: 28px; font-size: 1rem; margin-left: 2px; }
+.forms-help .grammar-head { padding-right: 32px; }
+@media (max-width: 640px) { .verb-help-grid { grid-template-columns: 1fr; } .verb-usage-row { grid-template-columns: 30px 1fr; } .verb-usage-row > span:last-child { grid-column: 2; } }

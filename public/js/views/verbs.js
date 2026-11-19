@@ -4,7 +4,7 @@ import { h, md, speak, stopSpeak, speakBtn, sample, sfx, confetti, checkText, mo
 import {
   S, save, addXp, wordCounts, verbAlts, verbAnswers, verbStatus, verbCounts, dueVerbs, gradeVerb, verbKnown, learnVerb, forgetVerb,
 } from '../store.js';
-import { header, bar, chip, levelChip, empty } from '../ui.js';
+import { header, bar, chip, levelChip, empty, grammarNode } from '../ui.js';
 import { L, plural } from '../i18n.js';
 
 const BATCH = 10;
@@ -38,6 +38,115 @@ const mark = (text, form) => {
 };
 const patternChip = (v) => chip(`${PATTERNS[pattern(v)][0]} · ${PATTERNS[pattern(v)][1]}`, 'now');
 
+/** The full explanation of the three forms, shown like a grammar lesson (explanations in Romanian, as in the course). */
+const FORMS_HELP = { grammar: {
+  title: 'The three forms of irregular verbs',
+  titleRo: 'Cele trei forme ale verbelor neregulate: ce sunt și când le folosești',
+  sections: [
+    {
+      headingRo: 'Ce sunt cele trei forme?',
+      textRo: 'Orice verb englezesc are trei forme de bază. La verbele **regulate**, V2 și V3 se fac simplu, cu **-ed**: work – worked – worked. La cele **neregulate** sunt speciale și trebuie învățate pe de rost: **say – said – said**, **go – went – gone**. Atenție: **viitorul nu e o formă separată** — se face cu *will* + V1 (I will say).',
+      table: { headers: ['Forma', 'Numele', 'say', 'go', 'write'], rows: [
+        ['**V1**', 'forma de bază (base form / infinitive)', 'say', 'go', 'write'],
+        ['**V2**', 'trecutul simplu (past simple)', 'said', 'went', 'wrote'],
+        ['**V3**', 'participiul trecut (past participle)', 'said', 'gone', 'written'],
+      ] },
+      examples: [
+        { en: 'I always say hello to the security guard.', ro: 'Mereu îl salut pe paznic. (V1)' },
+        { en: 'She said yes to our offer yesterday.', ro: 'Ieri a spus da la oferta noastră. (V2)' },
+        { en: 'I have said it many times: test before you deploy!', ro: 'Am spus-o de multe ori: testează înainte de deploy! (V3)' },
+      ],
+    },
+    {
+      headingRo: 'V1 — forma de bază: prezent, viitor și după did / can / to',
+      textRo: 'V1 e forma din dicționar. O folosești la **prezent** (la he/she/it primește **-s**: she says, he goes), la **viitor** (will say), după **can / must / should**, după **to**, la **imperativ** și — foarte important — în **întrebările și negațiile la trecut, după did**: *Did you say…?*, *I didn\'t go*.',
+      table: { headers: ['Structura', 'Exemplu'], rows: [
+        ['I / you / we / they + **V1**', 'I **say** · they **go**'],
+        ['he / she / it + **V1 + s**', 'she **says** · he **goes**'],
+        ['will / going to + **V1**', 'I will **say** · we\'re going to **go**'],
+        ['can / must / should + **V1**', 'you should **say** · we must **go**'],
+        ['to + **V1**', 'I want to **say** something'],
+        ['**did** + V1 (întrebare la trecut)', 'Did you **say** that? · Did he **go**?'],
+        ['**didn\'t** + V1 (negație la trecut)', 'I didn\'t **say** that · she didn\'t **go**'],
+      ] },
+      examples: [
+        { en: 'The client says the invoice is wrong.', ro: 'Clientul zice că factura e greșită.' },
+        { en: 'We will go live on Monday.', ro: 'Lansăm luni.' },
+        { en: 'Did the manager say anything about the deadline?', ro: 'A zis managerul ceva despre termen?' },
+      ],
+    },
+    {
+      headingRo: 'V2 — trecutul simplu (past simple)',
+      textRo: 'Pentru o acțiune **terminată**, într-un moment clar din trecut: *yesterday, last week, in 2020, two days ago, when I was a child*. V2 apare **doar în propoziții afirmative**. În întrebări și negații revii la **V1**, pentru că *did* poartă deja timpul trecut.',
+      table: { headers: ['Tip de propoziție', 'Corect', 'Greșit'], rows: [
+        ['Afirmativă', 'I **said** · we **went**', '—'],
+        ['Întrebare', 'Did you **say**? · Did you **go**?', 'Did you said? · Did you went?'],
+        ['Negativă', 'I didn\'t **say** · we didn\'t **go**', 'I didn\'t said · we didn\'t went'],
+      ] },
+      examples: [
+        { en: 'The client said yes last Friday.', ro: 'Clientul a zis da vinerea trecută.' },
+        { en: 'We went to Rome two years ago.', ro: 'Am fost la Roma acum doi ani.' },
+        { en: 'I wrote the first version in one night.', ro: 'Am scris prima versiune într-o singură noapte.' },
+      ],
+    },
+    {
+      headingRo: 'V3 — participiul trecut (past participle)',
+      textRo: 'V3 **nu stă niciodată singur ca verb**: vine după **have / has / had** (timpurile perfecte) sau după **be** (pasivul). Poate fi și **adjectiv**: *a broken screen*, *a written offer*.',
+      table: { headers: ['Structura', 'Când o folosești', 'Exemplu'], rows: [
+        ['have / has + **V3**', 'prezentul perfect: experiență, rezultat care contează acum', 'I have **said** it twice · She has **gone** home'],
+        ['had + **V3**', 'mai-mult-ca-perfectul: înaintea altui moment din trecut', 'He had **gone** when I arrived'],
+        ['be (is / was / will be) + **V3**', 'pasivul: nu contează cine face acțiunea', 'It was **said** in the meeting · The bug was **found**'],
+        ['will have + **V3**', 'viitorul perfect: gata până la un moment', 'By Friday we will have **written** the tests'],
+        ['should / could / must have + **V3**', 'despre trecut: regret, critică, deducție', 'You should have **said** something'],
+        ['**V3** ca adjectiv', 'descrie ceva', 'a **broken** laptop · a **written** offer'],
+      ] },
+      examples: [
+        { en: 'I have never said that to a client.', ro: 'N-am spus niciodată asta unui client.' },
+        { en: 'She has gone to the airport.', ro: 'A plecat la aeroport (și e încă acolo / pe drum).' },
+        { en: 'The new feature was written in TypeScript.', ro: 'Funcția nouă a fost scrisă în TypeScript.' },
+      ],
+    },
+    {
+      headingRo: 'Cum le înveți mai ușor: pe tipare',
+      textRo: 'Aproape **jumătate** dintre verbe au **V2 = V3** (say – said – said), deci de multe ori ai de învățat o singură formă nouă. Folosește filtrul **„Tipar”** din listă ca să le exersezi pe grupe. Iar verbele cu prefix (over-, re-, under-, mis-, out-) se conjugă exact ca verbul de bază: **oversee** ca *see – saw – seen*, **rewrite** ca *write – wrote – written*.',
+      table: { headers: ['Tipar', 'Exemple'], rows: [
+        ['**V2 = V3** (A – B – B)', 'say – said – said · buy – bought – bought · keep – kept – kept'],
+        ['**toate diferite** (A – B – C)', 'go – went – gone · write – wrote – written · take – took – taken'],
+        ['**toate la fel** (A – A – A)', 'cut – cut – cut · put – put – put · let – let – let'],
+        ['**prima = a treia** (A – B – A)', 'come – came – come · run – ran – run · become – became – become'],
+      ] },
+      examples: [
+        { en: 'I bought a laptop last week. Have you bought one yet?', ro: 'Mi-am luat un laptop săptămâna trecută. Tu ți-ai luat deja unul?' },
+        { en: 'We cut the budget last year and it has been cut again.', ro: 'Am tăiat bugetul anul trecut și a fost tăiat din nou.' },
+      ],
+    },
+  ],
+  tipsRo: [
+    'După **did** vine mereu V1: **Did you go?**, nu „Did you went?”.',
+    'După **have / has** vine V3: **I have gone**, nu „I have went”.',
+    'V3 nu stă singur: **I saw it** sau **I have seen it**, nu „I seen it”.',
+    '**been** vs **gone**: *She has been to Paris* (a fost și s-a întors) · *She has gone to Paris* (e acolo acum).',
+  ],
+} };
+/** Opens the explanation of the three forms. */
+export function formsHelp() { modal(h('div.forms-help', grammarNode(FORMS_HELP)), { wide: true }); }
+const helpBtn = (label) => h('button.btn.help-btn', { type: 'button', onclick: (e) => { e.stopPropagation(); formsHelp(); } },
+  label || L('❓ Cum se folosesc cele trei forme', '❓ How the three forms are used'));
+
+/** How this verb's three forms are used, built from its forms (go → I go · will go · did you go? · I went · I have gone). */
+function usage(v) {
+  const a = v.v1, b = verbAlts(v.v2)[0], c = verbAlts(v.v3)[0];
+  const rows = a === 'be'
+    ? [['V1', L('prezent / viitor', 'present / future'), 'I am · you are · she is · I will be'],
+      ['V2', L('trecut simplu', 'past simple'), 'I was · we were · Were you…?'],
+      ['V3', L('după have / had', 'after have / had'), 'I have been · it had been']]
+    : [['V1', L('prezent, viitor, după did / can / to', 'present, future, after did / can / to'), `I ${a} · I will ${a} · Did you ${a}? · I didn't ${a}`],
+      ['V2', L('trecut simplu (doar afirmativ)', 'past simple (affirmative only)'), `I ${b} (yesterday)`],
+      ['V3', L('după have / had / be', 'after have / had / be'), `I have ${c} · I had ${c}`]];
+  return h('div.verb-usage',
+    rows.map(([k, when, ex]) => h('div.verb-usage-row', h('strong', k), h('span.muted.small', when), h('span', ex))));
+}
+
 /** The full card of a verb: forms, pronunciation, meaning, pattern, two examples. */
 function verbCard(v) {
   return h('div.vcard-in.fade-in',
@@ -46,8 +155,10 @@ function verbCard(v) {
     v.ipa ? h('div.vipa', v.ipa) : null,
     h('div.vro', v.ro || ''),
     h('div.row.center.wrap', levelChip(v.levelId), patternChip(v)),
+    usage(v),
     v.ex2 ? h('div.vex', speakBtn(v.ex2), h('div', h('div.en', { html: mark(v.ex2, v.v2) }), h('div.ro', v.ex2Ro || ''))) : null,
-    v.ex3 ? h('div.vex', speakBtn(v.ex3), h('div', h('div.en', { html: mark(v.ex3, v.v3) }), h('div.ro', v.ex3Ro || ''))) : null);
+    v.ex3 ? h('div.vex', speakBtn(v.ex3), h('div', h('div.en', { html: mark(v.ex3, v.v3) }), h('div.ro', v.ex3Ro || ''))) : null,
+    h('div.row.center.mt', helpBtn()));
 }
 
 // ---------- sessions ----------
@@ -288,18 +399,19 @@ export function verbsView(main) {
         h('div.row.between', h('span', L('Verbe neregulate învățate', 'Irregular verbs learned')), h('strong', `${c.learned} / ${c.total}`)),
         bar(c.total ? c.learned / c.total : 0, '#a78bfa'),
         h('p.muted.small', L(`${c.learning} în curs · ${c.new} de învățat · ${due.length} de repetat azi`, `${c.learning} being learned · ${c.new} to learn · ${due.length} to review today`))),
-      h('details.card.verb-help',
-        h('summary', L('ℹ️ Ce sunt cele trei forme?', 'ℹ️ What are the three forms?')),
-        h('p', { html: md(L('**V1 — forma de bază:** *I go to work.* Tot cu ea faci și **viitorul**: *I will go* (will + V1), așa că viitorul nu are o formă separată.', '**V1 — base form:** *I go to work.* The **future** uses it too: *I will go* (will + V1), so the future has no separate form.')) }),
-        h('p', { html: md(L('**V2 — trecutul simplu (past simple):** *I went to Rome last year.*', '**V2 — past simple:** *I went to Rome last year.*')) }),
-        h('p', { html: md(L('**V3 — participiul trecut (past participle):** pentru prezentul perfect și pasiv: *I have gone*, *The bug was found.*', '**V3 — past participle:** for the present perfect and the passive: *I have gone*, *The bug was found.*')) }),
-        h('p.muted', L('La verbele regulate V2 și V3 sunt simple (+ed: work – worked – worked). Cele de aici sunt excepțiile — de-asta trebuie învățate pe de rost.', 'Regular verbs just add -ed (work – worked – worked). These are the exceptions — that is why they must be learned by heart.'))),
+      h('div.card.verb-help',
+        h('div.verb-help-grid',
+          h('div', h('strong', 'V1 · say'), h('span.muted.small', L('forma de bază: prezent, viitor (will say), după did / can / to', 'base form: present, future (will say), after did / can / to'))),
+          h('div', h('strong', 'V2 · said'), h('span.muted.small', L('trecutul simplu: ieri, anul trecut (doar afirmativ)', 'past simple: yesterday, last year (affirmative only)'))),
+          h('div', h('strong', 'V3 · said'), h('span.muted.small', L('participiul: după have / had / be (I have said, it was said)', 'past participle: after have / had / be (I have said, it was said)')))),
+        h('div.row.center.mt', helpBtn())),
       h('div.row.center.wrap',
         due.length ? h('button.btn.primary.big', { onclick: () => review(due.slice(0, 20)) }, L(`🔁 Repetă ${Math.min(20, due.length)} de azi`, `🔁 Review ${Math.min(20, due.length)} due today`)) : null,
         fresh.length ? h('button.btn' + (due.length ? '.big' : '.primary.big'), { onclick: () => learn(fresh.slice(0, BATCH)) }, L(`▶ Învață următoarele ${Math.min(BATCH, fresh.length)}`, `▶ Learn the next ${Math.min(BATCH, fresh.length)}`)) : null,
         fresh.length ? h('button.btn.big', { onclick: () => checkMe(fresh.slice(0, BATCH)), title: L('Scrii formele înainte să le vezi: cele pe care le știi deja trec la „învățate”', 'Type the forms before seeing them: the ones you already know go straight to “learned”') }, L(`⚡ Verifică-mă direct (${Math.min(BATCH, fresh.length)})`, `⚡ Test me first (${Math.min(BATCH, fresh.length)})`)) : null,
         c.learned + c.learning >= 4 ? h('button.btn', { onclick: () => review(sample(S.verbs.filter((v) => verbStatus(v.v1) !== 'new'), 10), false) }, L('🎲 Exersare liberă', '🎲 Free practice')) : null),
-      h('p.muted.small.center', L('Verbele vin în ordinea folosirii: primele sunt cele mai frecvente. Fiecare răspuns corect îți aduce XP pentru obiectivul zilnic.', 'The verbs come in order of use: the first ones are the most frequent. Every correct answer earns XP for your daily goal.')),
+      h('p.muted.small.center', L('Verbele vin în ordinea folosirii: primele sunt cele mai frecvente. Fiecare răspuns corect îți aduce XP pentru obiectivul zilnic. ', 'The verbs come in order of use: the first ones are the most frequent. Every correct answer earns XP for your daily goal. '),
+        h('button.icon-btn.help-icon', { type: 'button', title: L('Cum se folosesc cele trei forme', 'How the three forms are used'), onclick: formsHelp }, '❓')),
       h('div.row.wrap.filters', search,
         sel(fLevel, [['all', L('Toate nivelurile', 'All levels')], ['a1', 'A1'], ['a2', 'A2'], ['b1', 'B1'], ['b2', 'B2']], (x) => { fLevel = x; }),
         sel(fStatus, [['all', L('Orice stare', 'Any status')], ['new', STATUS.new[0]], ['learning', STATUS.learning[0]], ['learned', STATUS.learned[0]]], (x) => { fStatus = x; }),
