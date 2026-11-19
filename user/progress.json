@@ -1,6 +1,6 @@
 {
  "v": 1,
- "xp": 581,
+ "xp": 586,
  "goal": 50,
  "streak": {
   "count": 5,
@@ -11,7 +11,7 @@
   "2026-11-16": 116,
   "2026-11-17": 170,
   "2026-11-18": 96,
-  "2026-11-19": 95
+  "2026-11-19": 100
  },
  "placement": {
   "start": 2,
@@ -821,6 +821,244 @@
    "due": 20776,
    "ok": 0,
    "bad": 0
+  },
+  "or": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "and": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "also": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "OK": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "happy": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "good": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "learn": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "word": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "the USA": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "city": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "dot": {
+   "box": 1,
+   "due": 20777,
+   "ok": 1,
+   "bad": 0
+  },
+  "where": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "what": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "who": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "wrong": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "again": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "read": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "same": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "about": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "information": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "website": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "team": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "boss": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "best friend": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "dog": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "cat": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "family": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "child": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "girl": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "man": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "woman": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "people": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  },
+  "friend": {
+   "box": 6,
+   "due": 20836,
+   "ok": 0,
+   "bad": 0,
+   "known": true
+  }
+ },
+ "verbs": {
+  "feel": {
+   "box": 1,
+   "due": 20777,
+   "ok": 1,
+   "bad": 0
   }
  },
  "mistakes": [
@@ -873,8 +1111,9 @@
    "b2": 55.9
   },
   "2026-11-19": {
-   "xp": 581,
-   "w": 56,
+   "xp": 586,
+   "w": 88,
+   "v": 0,
    "b1": 77.1,
    "b2": 57.8
   }
