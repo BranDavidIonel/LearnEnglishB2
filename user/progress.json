@@ -1,17 +1,19 @@
 {
  "v": 1,
- "xp": 586,
+ "xp": 924,
  "goal": 50,
  "streak": {
-  "count": 5,
-  "last": "2026-11-19"
+  "count": 7,
+  "last": "2026-11-21"
  },
  "days": {
   "2026-11-15": 104,
   "2026-11-16": 116,
   "2026-11-17": 170,
   "2026-11-18": 96,
-  "2026-11-19": 100
+  "2026-11-19": 130,
+  "2026-11-20": 208,
+  "2026-11-21": 100
  },
  "placement": {
   "start": 2,
@@ -66,7 +68,9 @@
    "steps": {
     "vocab": true,
     "grammar": true,
-    "dialogue": true
+    "dialogue": true,
+    "practice": true,
+    "reading": true
    },
    "best": 0,
    "passed": false,
@@ -114,20 +118,31 @@
    "passed": false,
    "review": false,
    "tries": 0
+  },
+  "a1-u01": {
+   "steps": {
+    "grammar": true,
+    "dialogue": true,
+    "practice": true
+   },
+   "best": 0,
+   "passed": false,
+   "review": false,
+   "tries": 0
   }
  },
  "exams": {},
  "words": {
   "be in charge of": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
+   "box": 2,
+   "due": 20779,
+   "ok": 2,
    "bad": 0
   },
   "colleague": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
+   "box": 2,
+   "due": 20779,
+   "ok": 2,
    "bad": 0
   },
   "customer": {
@@ -138,9 +153,9 @@
    "known": true
   },
   "feature": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
+   "box": 2,
+   "due": 20779,
+   "ok": 2,
    "bad": 0
   },
   "maintain": {
@@ -151,33 +166,33 @@
    "known": true
   },
   "reliable": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
+   "box": 2,
+   "due": 20779,
+   "ok": 2,
    "bad": 0
   },
   "hard-working": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
+   "box": 2,
+   "due": 20779,
+   "ok": 2,
    "bad": 0
   },
   "outgoing": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
+   "box": 2,
+   "due": 20779,
+   "ok": 2,
    "bad": 0
   },
   "easy-going": {
    "box": 1,
-   "due": 20775,
-   "ok": 1,
+   "due": 20778,
+   "ok": 3,
    "bad": 0
   },
   "headquarters": {
    "box": 1,
-   "due": 20775,
-   "ok": 1,
+   "due": 20778,
+   "ok": 3,
    "bad": 0
   },
   "startup": {
@@ -188,9 +203,9 @@
    "known": true
   },
   "deal with": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
+   "box": 2,
+   "due": 20780,
+   "ok": 3,
    "bad": 0
   },
   "set up": {
@@ -201,9 +216,9 @@
    "known": true
   },
   "currently": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
+   "box": 2,
+   "due": 20779,
+   "ok": 2,
    "bad": 0
   },
   "patient": {
@@ -221,9 +236,9 @@
    "known": true
   },
   "workload": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
+   "box": 2,
+   "due": 20779,
+   "ok": 2,
    "bad": 0
   },
   "CV": {
@@ -234,15 +249,15 @@
    "known": true
   },
   "job interview": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
+   "box": 2,
+   "due": 20779,
+   "ok": 2,
    "bad": 0
   },
   "apply for": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
+   "box": 2,
+   "due": 20779,
+   "ok": 2,
    "bad": 0
   },
   "experience": {
@@ -260,9 +275,9 @@
    "known": true
   },
   "degree": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
+   "box": 2,
+   "due": 20779,
+   "ok": 2,
    "bad": 0
   },
   "employer": {
@@ -280,9 +295,9 @@
    "known": true
   },
   "salary": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
+   "box": 2,
+   "due": 20779,
+   "ok": 2,
    "bad": 0
   },
   "get promoted": {
@@ -293,45 +308,45 @@
    "known": true
   },
   "achievement": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
+   "box": 2,
+   "due": 20779,
+   "ok": 2,
    "bad": 0
   },
   "strength": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
+   "box": 2,
+   "due": 20779,
+   "ok": 2,
    "bad": 0
   },
   "weakness": {
-   "box": 1,
-   "due": 20775,
-   "ok": 1,
+   "box": 2,
+   "due": 20779,
+   "ok": 2,
    "bad": 0
   },
   "resign": {
-   "box": 0,
-   "due": 20774,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 2,
    "bad": 0
   },
   "career": {
-   "box": 0,
-   "due": 20774,
-   "ok": 0,
+   "box": 2,
+   "due": 20780,
+   "ok": 2,
    "bad": 0
   },
   "so far": {
-   "box": 0,
-   "due": 20774,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 2,
    "bad": 0
   },
   "take on": {
-   "box": 0,
-   "due": 20774,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 2,
    "bad": 0
   },
   "hello": {
@@ -503,75 +518,75 @@
    "known": true
   },
   "exhausted": {
-   "box": 0,
-   "due": 20775,
-   "ok": 0,
+   "box": 2,
+   "due": 20780,
+   "ok": 2,
    "bad": 0
   },
   "take up": {
-   "box": 0,
-   "due": 20775,
-   "ok": 0,
+   "box": 1,
+   "due": 20777,
+   "ok": 1,
    "bad": 0
   },
   "work out": {
-   "box": 0,
-   "due": 20775,
-   "ok": 0,
+   "box": 1,
+   "due": 20777,
+   "ok": 1,
    "bad": 0
   },
   "give up": {
-   "box": 0,
-   "due": 20775,
-   "ok": 0,
+   "box": 1,
+   "due": 20777,
+   "ok": 1,
    "bad": 0
   },
   "work-life balance": {
-   "box": 0,
-   "due": 20775,
-   "ok": 0,
+   "box": 1,
+   "due": 20777,
+   "ok": 1,
    "bad": 0
   },
   "side project": {
-   "box": 0,
-   "due": 20775,
-   "ok": 0,
+   "box": 1,
+   "due": 20777,
+   "ok": 1,
    "bad": 0
   },
   "climbing": {
-   "box": 0,
-   "due": 20775,
-   "ok": 0,
+   "box": 1,
+   "due": 20777,
+   "ok": 1,
    "bad": 0
   },
   "sourdough": {
-   "box": 0,
-   "due": 20775,
-   "ok": 0,
+   "box": 1,
+   "due": 20777,
+   "ok": 1,
    "bad": 0
   },
   "keep up with": {
-   "box": 0,
-   "due": 20775,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
    "bad": 0
   },
   "lately": {
-   "box": 0,
-   "due": 20775,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
    "bad": 0
   },
   "overtime": {
-   "box": 0,
-   "due": 20775,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
    "bad": 0
   },
   "struggle with": {
-   "box": 0,
-   "due": 20775,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
    "bad": 0
   },
   "burnout": {
@@ -701,9 +716,9 @@
    "known": true
   },
   "shop assistant": {
-   "box": 1,
-   "due": 20776,
-   "ok": 1,
+   "box": 2,
+   "due": 20780,
+   "ok": 2,
    "bad": 0
   },
   "Mr": {
@@ -721,105 +736,105 @@
    "known": true
   },
   "outage": {
-   "box": 0,
-   "due": 20776,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
    "bad": 0
   },
   "crash": {
-   "box": 0,
-   "due": 20776,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
    "bad": 0
   },
   "roll back": {
-   "box": 0,
-   "due": 20776,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
    "bad": 0
   },
   "backup": {
-   "box": 0,
-   "due": 20776,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
    "bad": 0
   },
   "on call": {
-   "box": 0,
-   "due": 20776,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
    "bad": 0
   },
   "hotfix": {
-   "box": 0,
-   "due": 20776,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
    "bad": 0
   },
   "realise": {
-   "box": 0,
-   "due": 20776,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
    "bad": 0
   },
   "suddenly": {
-   "box": 0,
-   "due": 20776,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
    "bad": 0
   },
   "eventually": {
-   "box": 0,
-   "due": 20776,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
    "bad": 0
   },
   "luckily": {
-   "box": 0,
-   "due": 20776,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
    "bad": 0
   },
   "miss a flight": {
-   "box": 0,
-   "due": 20776,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
    "bad": 0
   },
   "boarding pass": {
-   "box": 0,
-   "due": 20776,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
    "bad": 0
   },
   "delayed": {
-   "box": 0,
-   "due": 20776,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
    "bad": 0
   },
   "run out of": {
-   "box": 0,
-   "due": 20776,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
    "bad": 0
   },
   "turn out": {
-   "box": 0,
-   "due": 20776,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
    "bad": 0
   },
   "stranded": {
-   "box": 0,
-   "due": 20776,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
    "bad": 0
   },
   "connecting flight": {
-   "box": 0,
-   "due": 20776,
-   "ok": 0,
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
    "bad": 0
   },
   "or": {
@@ -1051,6 +1066,274 @@
    "ok": 0,
    "bad": 0,
    "known": true
+  },
+  "leisure": {
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
+   "bad": 0
+  },
+  "spare time": {
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
+   "bad": 0
+  },
+  "take part in": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "fitness": {
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
+   "bad": 0
+  },
+  "hiking": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "sporty": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "compete": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "muscle": {
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
+   "bad": 0
+  },
+  "vitamin": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "put on weight": {
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
+   "bad": 0
+  },
+  "ingredient": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "bake": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "roast": {
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
+   "bad": 0
+  },
+  "homemade": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "gardening": {
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
+   "bad": 0
+  },
+  "fiction": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "carry on": {
+   "box": 0,
+   "due": 20777,
+   "ok": 0,
+   "bad": 0
+  },
+  "be into": {
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
+   "bad": 0
+  },
+  "hang out": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "routine": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "incident": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "bug": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "issue": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "workaround": {
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
+   "bad": 0
+  },
+  "go down": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "shut down": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "restore": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "data loss": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "warning": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "affect": {
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
+   "bad": 0
+  },
+  "damage": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "identify": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "investigate": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "panic": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "blame": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "emergency": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "rescue": {
+   "box": 1,
+   "due": 20778,
+   "ok": 1,
+   "bad": 0
+  },
+  "survive": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "escape": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
+  },
+  "flood": {
+   "box": 3,
+   "due": 20784,
+   "ok": 1,
+   "bad": 0,
+   "known": true
   }
  },
  "verbs": {
@@ -1073,7 +1356,15 @@
   "b1-u03:17",
   "b1-u03:19",
   "b1-u03:t11",
-  "b1-u03:t6"
+  "b1-u03:t6",
+  "b1-u04:2",
+  "b1-u04:3",
+  "b1-u04:9",
+  "b1-u04:10",
+  "b1-u04:11",
+  "b1-u04:13",
+  "b1-u04:16",
+  "a1-u01:13"
  ],
  "games": {
   "memory": 36,
@@ -1111,24 +1402,74 @@
    "b2": 55.9
   },
   "2026-11-19": {
-   "xp": 586,
+   "xp": 616,
    "w": 88,
    "v": 0,
    "b1": 77.1,
    "b2": 57.8
+  },
+  "2026-11-20": {
+   "xp": 824,
+   "w": 116,
+   "v": 0,
+   "b1": 78.1,
+   "b2": 58.6
+  },
+  "2026-11-21": {
+   "xp": 924,
+   "w": 116,
+   "v": 0,
+   "b1": 78.1,
+   "b2": 58.6
   }
  },
  "cambridge": {
   "pet": {
-   "pet-test1": {},
+   "pet-test1": {
+    "reading": {
+     "score": 0.8125,
+     "correct": 26,
+     "total": 32,
+     "parts": [
+      5,
+      5,
+      4,
+      3,
+      5,
+      4
+     ],
+     "date": "2026-11-21"
+    },
+    "listening": {
+     "score": 0.76,
+     "correct": 19,
+     "total": 25,
+     "parts": [
+      6,
+      6,
+      3,
+      4
+     ],
+     "date": "2026-11-21"
+    },
+    "drafts": {
+     "0": "Hello!\nThat's fantastic news! \nThe best time to come would be in the weekend , 28 november , because I have free time . I weeks dayes I work from 8 AM  to 5 PM. \nIn my city Brasov , you will find a lot of old buildings it is a historical city , also exists many malls, restaurants, parcks, zoo.\nAbout outdoors what you sugest, I thinking about to hike a little mountain Postavarul from Poiana Brasov , it is easy and safe , the jouney will be thow or three hours , but is beatiful with forest and vegetation.\nDon't forget to bring some chocolats from your country.\n",
+     "1": "My perfect day would start with a vacantion on the mountain with my best friends . We go in to a trip with tend . In the day time will go in forest and pick up flowers and others plants and in the night will stay on the campfire  to roast some meat , stay to chats about our lives stories, drink a good wine , lisings music , play games in groups . Without smartphones and other thinks that distract us will be beatyfull day "
+    },
+    "writing": {
+     "score": 0.08333333333333333,
+     "date": "2026-11-21"
+    }
+   },
    "pet-test2": {}
   }
  },
  "speak": {
-  "said": 20,
+  "said": 24,
   "scen": {
    "role-b1-u01": 0.85,
-   "role-b1-u04": 0.8200000000000001
+   "role-b1-u04": 0.8200000000000001,
+   "role-b1-u03": 0.85
   },
   "best": {
    "sprint": 7
